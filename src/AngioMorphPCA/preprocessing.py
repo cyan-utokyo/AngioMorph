@@ -29,11 +29,14 @@ def parameterize_curve(Curve):
     interpolate_y = interp1d(t_values, Curve[:, 1], kind='cubic')
     interpolate_z = interp1d(t_values, Curve[:, 2], kind='cubic')
 
-    # 定义并返回一个新的函数，该函数接受一个t向量，并返回插值后的点
     def curve_function(t_vector):
-        x = interpolate_x(t_vector)
-        y = interpolate_y(t_vector)
-        z = interpolate_z(t_vector)
-        return np.array([x, y, z]).T  # 组合x, y, z坐标
+        # Clamp the values in t_vector to be within [0, 1]
+        t_vector_clamped = np.clip(t_vector, 0, 1)
+        
+        x = interpolate_x(t_vector_clamped)
+        y = interpolate_y(t_vector_clamped)
+        z = interpolate_z(t_vector_clamped)
+        return np.array([x, y, z]).T  # Combine x, y, z coordinates
+
 
     return curve_function    
