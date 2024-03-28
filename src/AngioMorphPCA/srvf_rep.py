@@ -23,3 +23,29 @@ def compute_srvf_func(resampled_curve):
     # 假设 parameterize_curve 和 generate_diff_homeomorphism 已经定义
     SRVF_func = parameterize_curve(SRVF_velocity)
     return SRVF_func
+
+
+def reconstruct_curve_from_srvf(SRVF, initial_point):
+    """
+    通过给定的SRVF和初始点重构原始曲线。
+    
+    Parameters:
+    - SRVF: Square Root Velocity Function，预期是一个numpy数组，形状为(n_points, n_dimensions)
+    - initial_point: 原始曲线的起始点，预期是一个形状为(n_dimensions,)的numpy数组
+    
+    Returns:
+    - reconstructed_curve: 重构的原始曲线，numpy数组，形状为(n_points, n_dimensions)
+    """
+    
+    # 计算SRVF的模长
+    magnitude = np.sqrt(np.sum(SRVF**2, axis=1))
+    
+    # 从SRVF恢复曲线的导数
+    derivatives = SRVF * magnitude[:, None]
+    
+    # 通过积分（累积和）恢复原始曲线
+    # np.cumsum在0轴上累加，因此对导数累加就是对速度积分
+    # 加上初始点以确定曲线的起始位置
+    reconstructed_curve = np.cumsum(derivatives, axis=0) + initial_point
+    
+    return reconstructed_curve

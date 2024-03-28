@@ -7,7 +7,7 @@ from AngioMorphPCA.preprocessing import parameterize_curve
 from AngioMorphPCA.io import Get_simple_vtk
 from scipy.integrate import simps
 from AngioMorphPCA.GenerateDiffHemeo import generate_diff_homeomorphism
-from AngioMorphPCA.srvf_rep import compute_srvf_func
+from AngioMorphPCA.srvf_rep import compute_srvf_func, reconstruct_curve_from_srvf
 from AngioMorphPCA.L2distance import calculate_l2_distance
 from procrustes import rotational, orthogonal
 from procrustes.generalized import generalized
@@ -24,8 +24,8 @@ total_files = brava_files + aneurisk_files
 # 最后求q的轨道[q]
 
 first_resample_num = 1000
-make_diffhomeo_num = 1000
-second_resample_num = 100
+make_diffhomeo_num = 8000
+second_resample_num = 200
 
 # all_orbits = []
 SRVF_functions = []
@@ -70,7 +70,48 @@ for j in tqdm(range(make_diffhomeo_num)):
     # average_aligned_shape = np.mean(aligned_shapes, axis=0)
 
 plt.hist(distance_record, bins=100)
-plt.show()
+plt.savefig('distance_record.png')
+plt.close()
 
 
 # 只需要寻找令new_distance_gpa最小的reparameterization即可。
+print(np.min(distance_record))
+min_idx = np.argmin(distance_record)
+min_reparam = aligned_shapes_record[min_idx]
+
+fig = plt.figure(figsize=(12, 4))
+ax1 = fig.add_subplot(131)
+ax2 = fig.add_subplot(132)
+ax3 = fig.add_subplot(133)
+for i in range(len(min_reparam)):
+    ax1.plot(min_reparam[i][:, 0], min_reparam[i][:, 1],color='black',alpha=0.5)
+    ax2.plot(min_reparam[i][:, 0], min_reparam[i][:, 2],color='black',alpha=0.5)
+    ax3.plot(min_reparam[i][:, 1], min_reparam[i][:, 2],color='black',alpha=0.5)
+plt.grid(True)
+fig.savefig('min_reparam.png')
+plt.close()
+
+average_min_reparam = np.mean(min_reparam, axis=0)
+
+reconstruct_average_min = reconstruct_curve_from_srvf(average_min_reparam, np.array([0, 0, 0]))
+reconstruct_average = reconstruct_curve_from_srvf(average_SRVF_reparam, np.array([0, 0, 0]))
+fig = plt.figure(figsize=(12, 4))
+ax1 = fig.add_subplot(131)
+ax2 = fig.add_subplot(132)
+ax3 = fig.add_subplot(133)
+ax1.plot(reconstruct_average_min[:, 0], reconstruct_average_min[:, 1], color='red')
+ax2.plot(reconstruct_average_min[:, 0], reconstruct_average_min[:, 2], color='red')
+ax3.plot(reconstruct_average_min[:, 1], reconstruct_average_min[:, 2], color='red')
+ax1.plot(reconstruct_average[:, 0], reconstruct_average[:, 1], color='k')
+ax2.plot(reconstruct_average[:, 0], reconstruct_average[:, 2], color='k')
+ax3.plot(reconstruct_average[:, 1], reconstruct_average[:, 2], color='k')
+ax1.grid(True)
+ax2.grid(True)
+ax3.grid(True)
+fig.savefig('average_min_reparam.png')
+plt.close()
+
+
+np.save('average_min_reparam.npy', average_min_reparam)
+np.save('min_reparam.npy', min_reparam)
+
