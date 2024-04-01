@@ -14,7 +14,7 @@ def generate_diff_homeomorphism():
     is_monotonic_increasing = False
     while not is_monotonic_increasing:
         # 随机选择系数a, b, c, d, e，使得它们的和为1，保证f(1) = 1
-        coeffs = np.random.uniform(-1, 1, 5)
+        coeffs = np.random.uniform(-100, 100, 5)
         coeffs /= coeffs.sum()
         
         # 检查导数在[0, 1]上是否始终大于0
