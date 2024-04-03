@@ -15,6 +15,7 @@ from tqdm import tqdm
 from datetime import datetime
 import os
 import pandas as pd
+from AngioMorphPCA.compute_geometry import compute_curvature_and_torsion
 
 
 def mkdir(super_path,testname):
@@ -29,21 +30,9 @@ def mkdir(super_path,testname):
 
 
 brava_files = glob.glob('brava_ica_mirrored/*.vtk')
-aneurisk_files = []
-# aneurisk_files = glob.glob('aneurisk_ica_mirrored/*.vtk')
-# pre_brava_files = glob.glob('brava_ica_mirrored/*.vtk')
-# print (len(pre_brava_files), len(aneurisk_files))
-# ill=pd.read_csv("./illcases.txt",header=None)
-# ill = np.array(ill[0])
+# aneurisk_files = []
+aneurisk_files = glob.glob('aneurisk_ica_mirrored/*.vtk')
 
-# print (ill)
-# brava_files = []
-# for i in range(len(pre_brava_files)):
-#     fname = pre_brava_files[i].split('\\')[-1].split('.')[0].split('_')[0]
-#     print (fname)
-#     if fname not in ill:
-#         brava_files.append(pre_brava_files[i])
-# print (len(brava_files), len(aneurisk_files))
 total_files = brava_files + aneurisk_files
 np.save("total_files.npy", total_files)
 
@@ -71,14 +60,46 @@ log.write("second_resample_num: {}\n".format(second_resample_num))
 # all_orbits = []
 SRVF_functions = []
 
+def compute_centroid(curves):
+    centroid = np.mean(curves, axis=0)
+    return np.array(centroid)
+
+def translate_to_centroid(curves):
+    centroid = compute_centroid(curves)
+    new_curves = []
+    for i in range(len(curves)):
+        new_curves.append(curves[i] - centroid)
+    return np.array(new_curves)
+
+def add_index_column(curve):
+    """
+    为形状为n,3的离散3D曲线增加一列索引，返回形状为n,4的数组。
+    
+    参数:
+    - curve: 一个形状为(n, 3)的numpy数组，表示离散3D曲线。
+    
+    返回:
+    - 一个形状为(n, 4)的numpy数组，其中最后一列为从0开始的索引。
+    """
+    n = curve.shape[0]  # 获取曲线中的点数
+    index_column = np.arange(n).reshape(-1, 1)  # 创建索引列
+    curve_with_index = np.hstack((curve, index_column))  # 将索引列添加到曲线数组的后面
+    return curve_with_index
+
+resampled_unit_curves = []
+curvatures = []
+torsions = []
 for i in range(len(total_files)):
     casename = total_files[i].split('\\')[-1].split('.')[0]
     temp = Get_simple_vtk(total_files[i])
-    temp_centroid = np.mean(temp, axis=0)
-    temp -= temp_centroid
+    temp = translate_to_centroid(temp)
+    c, t = compute_curvature_and_torsion(temp)
+    curvatures.append(c)
+    torsions.append(t)
     temp_func = parameterize_curve(temp)
     t_resampled = np.linspace(0, 1, first_resample_num)
     resampled_curve = temp_func(t_resampled)
+    resampled_unit_curves.append(resampled_curve)
     derivatives = np.gradient(resampled_curve, axis=0, edge_order=2)# 计算导数
     magnitude = np.linalg.norm(derivatives, axis=1)# 使用Simpson法则计算积分来得到曲线的长度，并缩放曲线
     integral = simps(magnitude, t_resampled)
@@ -117,10 +138,15 @@ for j in tqdm(range(make_diffhomeo_num)):
 
     average_SRVF_reparam = np.mean(SRVFs_reparam, axis=0)
 
-    shapes_stack = np.array(SRVFs_reparam)
-    # aligned_shapes, new_distance_gpa = generalized(shapes_stack)
-    aligned_shapes = generalized_procrustes(shapes_stack)
-    new_distance_gpa = 0
+    shapes_prestack = np.array(SRVFs_reparam)
+    shapes_stack = []
+    for i in range(len(shapes_prestack)):
+        shapes_stack.append(add_index_column(shapes_prestack[i]))
+    shape_stack = np.array(shapes_stack)
+
+    aligned_shapes, new_distance_gpa = generalized(shapes_stack)
+    # aligned_shapes = generalized_procrustes(shapes_stack)
+    # new_distance_gpa = 0
 
     average_aligned_shape = np.mean(aligned_shapes, axis=0)
     total_L2 = 0
@@ -157,27 +183,9 @@ plt.grid(True)
 fig.savefig(bkup_dir+'min_reparam.png')
 plt.close()
 
-average_min_reparam = np.mean(min_reparam, axis=0)
-
-reconstruct_average_min = reconstruct_curve_from_srvf(average_min_reparam, np.array([0, 0, 0]))
-reconstruct_average = reconstruct_curve_from_srvf(average_SRVF_reparam, np.array([0, 0, 0]))
-fig = plt.figure(figsize=(12, 4))
-ax1 = fig.add_subplot(131)
-ax2 = fig.add_subplot(132)
-ax3 = fig.add_subplot(133)
-ax1.plot(reconstruct_average_min[:, 0], reconstruct_average_min[:, 1], color='red')
-ax2.plot(reconstruct_average_min[:, 0], reconstruct_average_min[:, 2], color='red')
-ax3.plot(reconstruct_average_min[:, 1], reconstruct_average_min[:, 2], color='red')
-ax1.plot(reconstruct_average[:, 0], reconstruct_average[:, 1], color='k')
-ax2.plot(reconstruct_average[:, 0], reconstruct_average[:, 2], color='k')
-ax3.plot(reconstruct_average[:, 1], reconstruct_average[:, 2], color='k')
-ax1.grid(True)
-ax2.grid(True)
-ax3.grid(True)
-fig.savefig(bkup_dir+'average_min_reparam.png')
-plt.close()
-
-
-np.save(bkup_dir+'average_min_reparam.npy', average_min_reparam)
+# np.save(bkup_dir+'average_min_reparam.npy', average_min_reparam)
 np.save(bkup_dir+'min_reparam.npy', min_reparam)
 np.save(bkup_dir+'min_dh.npy', min_dh)
+np.save(bkup_dir+"resampled_unit_curves.npy" ,resampled_unit_curves)
+np.save(bkup_dir+"curvatures.npy" ,curvatures)
+np.save(bkup_dir+"torsions.npy" ,torsions)

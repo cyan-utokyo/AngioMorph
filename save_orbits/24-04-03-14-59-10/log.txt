@@ -1,0 +1,4 @@
+Start at: 24-04-03-14-59-10
+first_resample_num: 1000
+make_diffhomeo_num: 10000
+second_resample_num: 100
