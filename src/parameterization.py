@@ -12,7 +12,7 @@ from AngioMorphPCA.L2distance import calculate_l2_distance
 from procrustes import rotational,generalized
 from tqdm import tqdm
 from AngioMorphPCA.compute_geometry import compute_curvature_and_torsion
-
+import pandas as pd
 
 root_dir = "save_orbits/24-04-03-14-59-10/"
 
@@ -21,7 +21,26 @@ min_reparam = np.load(root_dir+'min_reparam.npy',allow_pickle=True)
 resampled_unit_curves = np.load(root_dir+'resampled_unit_curves.npy',allow_pickle=True)
 colors = np.zeros(len(min_reparam))
 colors[82:]=1
-# print (min_reparam.shape)
+aneurisk_meta = pd.read_csv('aneuriskmeta.csv')
+
+# print (aneurisk_meta.case_id)
+aneurysmLocation = np.array(['N']*len(total_files))
+aneurysmType = np.array(['N']*len(total_files))
+ruptureStatus = np.array(['N']*len(total_files))
+sacVolume = np.zeros(len(total_files))
+for i in range(len(total_files)):
+    filename = total_files[i].split('\\')[-1].split('_')[0]
+    if filename in aneurisk_meta.case_id.values:
+        aneurysmLocation[i] = aneurisk_meta.loc[aneurisk_meta.case_id==filename].aneurysmLocation.values[0]
+        aneurysmType[i] = aneurisk_meta.loc[aneurisk_meta.case_id==filename].aneurysmType.values[0]
+        ruptureStatus[i] = aneurisk_meta.loc[aneurisk_meta.case_id==filename].ruptureStatus.values[0]
+        sacVolume[i] = aneurisk_meta.loc[aneurisk_meta.case_id==filename].sacVolume.values[0]
+
+print (aneurysmLocation)
+print (aneurysmType)
+print (ruptureStatus)
+print (sacVolume)
+
 def compute_srvf_distance(q1, q2):
     """
     计算两个SRVF之间的距离。
@@ -84,7 +103,7 @@ plt.title('MDS结果')
 plt.xlabel('MDS1')
 plt.ylabel('MDS2')
 for i, txt in enumerate(range(1, distance_matrix.shape[0]+1)):
-    plt.annotate(txt, (x[i], y[i]))
+    plt.annotate(ruptureStatus[i], (x[i], y[i]))
 plt.savefig(root_dir+'MDS.png')
 plt.close()
 
@@ -113,7 +132,7 @@ principal_components = pca.fit_transform(data_standardized)
 plt.figure(figsize=(8, 6))
 plt.scatter(principal_components[:, 0], principal_components[:, 1], c=colors, cmap='viridis')
 for i, txt in enumerate(range(1, distance_matrix.shape[0]+1)):
-    plt.annotate(txt, (principal_components[i, 0], principal_components[i, 1]))
+    plt.annotate(ruptureStatus[i], (principal_components[i, 0], principal_components[i, 1]))
 plt.title('PCA结果')
 plt.xlabel('主成分1')
 plt.ylabel('主成分2')

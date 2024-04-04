@@ -12,7 +12,7 @@ lines = data.strip().split('\n')
 
 # 初始化用于保存分割数据的列表
 data_list = []
-
+给他
 # 遍历每行，使用正则表达式提取信息
 for line in lines:
     # 使用正则表达式匹配和分割数据
