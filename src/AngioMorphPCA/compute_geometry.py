@@ -9,7 +9,7 @@ from scipy.integrate import simps
 from AngioMorphPCA.GenerateDiffHemeo import generate_diff_homeomorphism
 from AngioMorphPCA.srvf_rep import compute_srvf_func, reconstruct_curve_from_srvf
 from AngioMorphPCA.L2distance import calculate_l2_distance
-from procrustes import rotational
+# from procrustes import rotational
 from tqdm import tqdm
 
 def compute_curvature_and_torsion(curve):
@@ -18,7 +18,7 @@ def compute_curvature_and_torsion(curve):
     r_prime = np.diff(curve, axis=0)
     r_double_prime = np.diff(r_prime, axis=0)
     r_triple_prime = np.diff(r_double_prime, axis=0)
-
+    
     # Pad derivatives to align array sizes
     r_prime = np.vstack((r_prime, np.zeros((1, 3))))
     r_double_prime = np.vstack((np.zeros((1, 3)), r_double_prime, np.zeros((1, 3))))
@@ -55,3 +55,21 @@ def compute_curvature_and_torsion(curve):
     interpolated_torsion = interp_torsion(np.arange(len(curve)))
 
     return interpolated_curvature, interpolated_torsion
+
+def build_curve_from_curvatures(curvatures, step_length=0.1):
+    # 初始化起点和初始方向角
+    x, y, theta = 0.0, 0.0, 0.0
+    xs, ys = [x], [y]  # 存储曲线上的点
+
+    for k in curvatures:
+        # 计算这一段的终点坐标
+        delta_theta = k * step_length
+        theta += delta_theta
+        x += step_length * np.cos(theta)
+        y += step_length * np.sin(theta)
+        
+        # 保存这一段的终点坐标
+        xs.append(x)
+        ys.append(y)
+
+    return xs, ys

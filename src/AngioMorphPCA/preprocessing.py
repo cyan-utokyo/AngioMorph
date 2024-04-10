@@ -40,3 +40,41 @@ def parameterize_curve(Curve):
 
 
     return curve_function    
+
+def calculate_3d_curve_abscissas(curve):
+    # 初始化长度列表，起始点的长度为0
+    abscissas = [0]
+
+    # 遍历曲线上的点，计算累积长度
+    for i in range(1, len(curve)):
+        # 计算当前点与前一个点之间的距离
+        distance = np.linalg.norm(np.array(curve[i]) - np.array(curve[i-1]))
+        # 将这个距离加到最后一个累积长度上，得到新的累积长度
+        abscissas.append(abscissas[-1] + distance)
+    return abscissas
+
+
+def remove_high_freq_components(data, freq_threshold):
+    """
+    使用傅立叶变换去除高频成分。
+    
+    参数:
+    - data: 一维数组，输入数据。
+    - freq_threshold: float，频率阈值，用于确定哪些频率成分被视为高频并需要被去除。
+    
+    返回:
+    - filtered_data: 一维数组，滤波后的数据。
+    """
+    # 执行傅立叶变换
+    data_fft = np.fft.fft(data)
+    # 获取频率
+    freq = np.fft.fftfreq(len(data))
+    
+    # 根据频率阈值滤除高频成分
+    data_fft[np.abs(freq) > freq_threshold] = 0
+    
+    # 执行逆傅立叶变换
+    filtered_data = np.fft.ifft(data_fft)
+    
+    # 返回实部，去除由于计算引入的虚部（应该接近于零）
+    return filtered_data.real
