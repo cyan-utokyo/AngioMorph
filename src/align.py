@@ -71,10 +71,10 @@ def plot_geodesic(geod_points, ax=None, add_origin=True):
 
 
 brava_files = glob.glob('brava_ica_mirrored/*.vtk')
-# aneurisk_files = []
-aneurisk_files = glob.glob('aneurisk_ica_mirrored/*.vtk')
+aneurisk_files = []
+# aneurisk_files = glob.glob('aneurisk_ica_mirrored/*.vtk')
 total_files = brava_files + aneurisk_files
-np.save("total_files_with_a.npy", total_files)
+np.save("total_files.npy", total_files)
 
 resample_num=120
 
@@ -105,6 +105,8 @@ for i in range(len(total_files)):
     # print (len(c), len(fft_c))
     curvatures.append(fft_c)
 curvatures = np.array(curvatures)
+
+np.save("unaligned_curvatures.npy", curvatures)
 mean_curve = np.mean(curves, axis=0)
 mean_curve_curvature, _ = compute_curvature_and_torsion(mean_curve)
 mean_curve_curvature = remove_high_freq_components(mean_curve_curvature, freq_threshold)
@@ -230,5 +232,5 @@ plt.show()
 
 save_dir = mkdir("./", "geom_aligned_curves")
 # curve_bs = np.array(curve_bs)
-np.save(save_dir+"geomstats_aligned_to_first_with_a.npy", curve_bs)
-np.save(save_dir+"geomstats_aligned_to_frechet_with_a.npy", curve_cs)
+np.save(save_dir+"geomstats_aligned_to_first.npy", curve_bs)
+np.save(save_dir+"geomstats_aligned_to_frechet.npy", curve_cs)
