@@ -30,6 +30,8 @@ def Get_simple_vtk(filepath, frenet=0):
     return np_pts
 
 def makeVtkFile(savePath, coords, scalarAttributes):
+    # scalarAttribute(list):
+    # [['MaximumInscribedSphereRadius', 'float', pandas.Series]]
     v = open(savePath, "w+")
     v.write("# vtk DataFile Version 2.0\nVessel Segment\nASCII\nDATASET POLYDATA\nPOINTS {} float\n".format(len(coords)))
     for i in range(len(coords)):
