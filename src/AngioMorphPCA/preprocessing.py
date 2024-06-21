@@ -4,6 +4,13 @@ import vtk
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 
+def min_max_normalize(data):
+    """标准化数据，使每一列的均值为0，标准差为1"""
+    mean = np.mean(data, axis=0)
+    std_dev = np.std(data, axis=0)
+    normalized_data = (data - mean) / std_dev
+    return normalized_data
+
 def parameterize_curve(Curve):
     """
     Create a function to parameterize a 3D curve.
@@ -78,3 +85,11 @@ def remove_high_freq_components(data, freq_threshold):
     
     # 返回实部，去除由于计算引入的虚部（应该接近于零）
     return filtered_data.real
+
+
+def autocovariance_function(data):
+    """计算自协方差矩阵"""
+    mean = np.mean(data, axis=0)
+    data_centered = data - mean
+    cov_matrix = np.dot(data_centered.T, data_centered) / (data_centered.shape[0] - 1)
+    return cov_matrix
