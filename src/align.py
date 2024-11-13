@@ -21,6 +21,48 @@ from geomstats.geometry.discrete_curves import (
 )
 
 
+# 生成VTK文件内容
+def generate_vtk(data, filename):
+    with open(filename, 'w') as vtk_file:
+        vtk_file.write("# vtk DataFile Version 3.0\n")
+        vtk_file.write("Curve data\n")
+        vtk_file.write("ASCII\n")
+        vtk_file.write("DATASET POLYDATA\n")
+        
+        # 写入点数据
+        num_points = len(data)
+        vtk_file.write(f"POINTS {num_points} float\n")
+        # for index, row in data.iterrows():
+            # vtk_file.write(f"{row['x']} {row['y']} {row['z']}\n")
+        for row in data:
+            vtk_file.write(f"{row[0]} {row[1]} {row[2]}\n")
+        
+        # 写入拓扑数据
+        vtk_file.write(f"LINES 1 {num_points + 1}\n")
+        vtk_file.write(f"{num_points} " + " ".join(map(str, range(num_points))) + "\n")
+        
+        # # 写入点数据属性
+        # vtk_file.write(f"POINT_DATA {num_points}\n")
+        
+        # # 写入 r 数据
+        # vtk_file.write("SCALARS r float 1\n")
+        # vtk_file.write("LOOKUP_TABLE default\n")
+        # for value in data['r']:
+        #     vtk_file.write(f"{value}\n")
+        
+        # # 写入 curvature 数据
+        # vtk_file.write("SCALARS curvature float 1\n")
+        # vtk_file.write("LOOKUP_TABLE default\n")
+        # for value in data['curvature']:
+        #     vtk_file.write(f"{value}\n")
+        
+        # # 写入 torsion 数据
+        # vtk_file.write("SCALARS torsion float 1\n")
+        # vtk_file.write("LOOKUP_TABLE default\n")
+        # for value in data['torsion']:
+        #     vtk_file.write(f"{value}\n")
+
+
 def compute_centroid(curves):
     centroid = np.mean(curves, axis=0)
     return np.array(centroid)
@@ -73,44 +115,38 @@ def plot_geodesic(geod_points, ax=None, add_origin=True):
 brava_files = glob.glob('brava_ica_mirrored/*.vtk')
 aneurisk_files = []
 # aneurisk_files = glob.glob('aneurisk_ica_mirrored/*.vtk')
-total_files = brava_files + aneurisk_files
+juntendou_files = glob.glob('../juntentou/*.vtk')
+print (juntendou_files)
+total_files = brava_files + aneurisk_files + juntendou_files
 np.save("total_files.npy", total_files)
 
 resample_num=120
 
-
-curvatures=[]
+vtk_files_with_j_dir = mkdir("./", "vtk_files_with_j")
+# curvatures=[]
 curves = []
 freq_threshold = 0.06
 fig = plt.figure()
-ax1 = fig.add_subplot(211)
-ax2 = fig.add_subplot(212)
-# ax3 = fig.add_subplot(313)
+ax1 = fig.add_subplot(111)
 for i in range(len(total_files)):
+    if i <79:
+        color = 'black'
+    else:
+        color = 'red'
     casename = total_files[i].split('\\')[-1].split('.')[0]
     temp = Get_simple_vtk(total_files[i])
+    if i > 78:
+        temp = temp[::-1]
     temp = translate_to_centroid(temp)
     temp_func = parameterize_curve(temp)
     t_resampled = np.linspace(0, 1, resample_num)
     resampled_curve = temp_func(t_resampled)
     curves.append(resampled_curve)
-    c, t = compute_curvature_and_torsion(resampled_curve)
-    ax1.plot(c, label=casename)
-    fft_c = remove_high_freq_components(c, freq_threshold )
-    rebuild = build_curve_from_curvatures(fft_c, step_length=0.1)
-    ax2.plot(fft_c, label=casename)
-    ax1.set_title('Curvature')
-    ax2.set_title('Curvature (filtered)')
-    # ax3.plot(rebuild[0], rebuild[1], label=casename)
-    # print (len(c), len(fft_c))
-    curvatures.append(fft_c)
-curvatures = np.array(curvatures)
+    ax1.plot(resampled_curve[:,0],resampled_curve[:,1],label=casename, color=color)
+    generate_vtk(resampled_curve, f"vtk_files_with_j/{casename}.vtk")
 
-np.save("unaligned_curvatures.npy", curvatures)
-mean_curve = np.mean(curves, axis=0)
-mean_curve_curvature, _ = compute_curvature_and_torsion(mean_curve)
-mean_curve_curvature = remove_high_freq_components(mean_curve_curvature, freq_threshold)
-ax2.plot(mean_curve_curvature, label='Mean',linewidth=3, color='black')
+curves = np.array(curves)
+np.save("unaligned_curves.npy", curves)
 plt.tight_layout()
 plt.show()
 
@@ -142,11 +178,11 @@ for i in tqdm(range(1,len(curves))):
     curve_b_aligned = curves_r3.fiber_bundle.align(curve_b, curve_a)
     curve_bs.append(np.array(curve_b))
 
-    # hgeod_fun = curves_r3.quotient.metric.geodesic(curve_a, curve_b)
+    hgeod_fun = curves_r3.quotient.metric.geodesic(curve_a, curve_b)
 
-    # n_times = 10
-    # times = gs.linspace(0.0, 1.0, n_times)
-    # hgeod = hgeod_fun(times)
+    n_times = 10
+    times = gs.linspace(0.0, 1.0, n_times)
+    hgeod = hgeod_fun(times)
 
     plot_curve(curve_b_aligned, ax=ax1)
 curve_bs = np.array(curve_bs)
