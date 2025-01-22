@@ -118,24 +118,27 @@ aneurisk_files = []
 juntendou_files = glob.glob('../juntentou/*.vtk')
 print (juntendou_files)
 total_files = brava_files + aneurisk_files + juntendou_files
-np.save("total_files.npy", total_files)
+np.save("total_files_j3.npy", total_files)
 
 resample_num=120
+process_file_num = 79
 
-vtk_files_with_j_dir = mkdir("./", "vtk_files_with_j")
+
+
+vtk_files_with_j_dir = mkdir("./", "vtk_files_with_j3")
 # curvatures=[]
 curves = []
 freq_threshold = 0.06
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
 for i in range(len(total_files)):
-    if i <79:
+    if i < process_file_num:
         color = 'black'
     else:
         color = 'red'
     casename = total_files[i].split('\\')[-1].split('.')[0]
     temp = Get_simple_vtk(total_files[i])
-    if i > 78:
+    if i > process_file_num:
         temp = temp[::-1]
     temp = translate_to_centroid(temp)
     temp_func = parameterize_curve(temp)
@@ -143,10 +146,14 @@ for i in range(len(total_files)):
     resampled_curve = temp_func(t_resampled)
     curves.append(resampled_curve)
     ax1.plot(resampled_curve[:,0],resampled_curve[:,1],label=casename, color=color)
-    generate_vtk(resampled_curve, f"vtk_files_with_j/{casename}.vtk")
+    generate_vtk(resampled_curve, f"vtk_files_with_j3/{casename}.vtk")
 
 curves = np.array(curves)
-np.save("unaligned_curves.npy", curves)
+
+print ("length of curves", len(curves))
+
+
+np.save("unaligned_curves_j3.npy", curves)
 plt.tight_layout()
 plt.show()
 
@@ -158,6 +165,9 @@ curves_r3 = DiscreteCurvesStartingAtOrigin(
 )
 
 curves_r3.equip_with_metric(SRVMetric)
+# curves_r3.equip_with_metric(SRVMetric)
+curves_r3.equip_with_group_action(("rotations", "reparametrizations"))
+curves_r3.equip_with_quotient()
 curve_a = curves_r3.projection(curves[0])
 curve_a = curves_r3.normalize(curve_a)
 curve_bs = []
@@ -171,9 +181,8 @@ for i in tqdm(range(1,len(curves))):
     curve_b = curves_r3.projection(curves[i])
     curve_b = curves_r3.normalize(curve_b)
 
-    curves_r3.equip_with_group_action("rotations and reparametrizations")
-    curves_r3.equip_with_quotient_structure()
-
+    # curves_r3.equip_with_group_action("rotations and reparametrizations")
+    # # curves_r3.equip_with_quotient_structure()
 
     curve_b_aligned = curves_r3.fiber_bundle.align(curve_b, curve_a)
     curve_bs.append(np.array(curve_b))
@@ -228,8 +237,8 @@ for i in tqdm(range(1,len(curves))):
     curve_b = curves_r3.projection(curve_bs[i])
     curve_b = curves_r3.normalize(curve_b)
 
-    curves_r3.equip_with_group_action("rotations and reparametrizations")
-    curves_r3.equip_with_quotient_structure()
+    # curves_r3.equip_with_group_action("rotations and reparametrizations")
+    # curves_r3.equip_with_quotient_structure()
 
 
     curve_b_aligned = curves_r3.fiber_bundle.align(curve_b, curve_a)
@@ -266,7 +275,7 @@ ax1.plot(mean_estimate_c, color="k")
 plt.show()
 
 
-save_dir = mkdir("./", "geom_aligned_curves")
+save_dir = mkdir("./", "geom_aligned_curves_j3")
 # curve_bs = np.array(curve_bs)
-np.save(save_dir+"geomstats_aligned_to_first.npy", curve_bs)
-np.save(save_dir+"geomstats_aligned_to_frechet.npy", curve_cs)
+np.save(save_dir+"geomstats_aligned_to_first_j3.npy", curve_bs)
+np.save(save_dir+"geomstats_aligned_to_frechet_j3.npy", curve_cs)
