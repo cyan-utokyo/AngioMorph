@@ -11,6 +11,33 @@ def min_max_normalize(data):
     normalized_data = (data - mean) / std_dev
     return normalized_data
 
+
+
+def parameterize_1d_curve(curve, abscissas):
+    """
+    Create a function to parameterize a 1D curve with non-uniform abscissas.
+    
+    :param curve: A 1D numpy array representing the curve's discrete y-values.
+    :param abscissas: A 1D numpy array representing the x-values (abscissas) of the curve, should be the same length as `curve`.
+    :return: A function that takes a vector of parameter values (t) and returns interpolated points on the curve,
+             along with the normalized abscissas (t_values).
+    """
+    # Normalize abscissas to the range [0, 1] for consistent parameterization
+    t_values = (abscissas - abscissas.min()) / (abscissas.max() - abscissas.min())
+
+    # Create an interpolation function for the curve
+    interpolate_y = interp1d(t_values, curve, kind='cubic', fill_value="extrapolate")
+
+    def curve_function(t_vector):
+        # Clamp t_vector values to be within [0, 1]
+        t_vector_clamped = np.clip(t_vector, 0, 1)
+        
+        # Interpolate y-values at the given t values
+        y = interpolate_y(t_vector_clamped)
+        return y
+
+    return curve_function, t_values
+
 def parameterize_curve(Curve):
     """
     Create a function to parameterize a 3D curve.
