@@ -1,0 +1,129 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=D:\data\hayakawa\20090421_060Y_M_009
+key_dicom=*.dcm
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1.000000
+region growing=1050
+voxel gaussian=0
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1000
+z_step=2
+
+[region growing]
+threshold radius=1.200000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=400
+threshold ct-max=800
+color_index=4
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=30.000000
+[cross section]
+divide_angle=10
+[roi]
+min_z=80
+max_z=475
+[spline fitting]
+length step=5.000000
+[seed_points]
+num=1
+No1=26.371756,51.738409,67.500000
+ct1=692
+No2=25.576470,50.295034,37.500000
+ct2=705
+No3=23.336442,56.317723,41.250000
+ct3=650
+[thinning_points]
+num=7
+No1=43.758000,35.568000,30.688141
+No2=32.292000,52.416000,22.723280
+No3=36.504000,27.144000,100.732064
+No4=11.466000,25.272000,111.742313
+No5=22.230000,55.224000,118.067350
+No6=25.506000,57.564000,116.427526
+No7=27.846000,50.076000,117.598829
+No8=11.466000,25.272000,111.742313
+No9=26.442000,49.608000,74.312305
+No10=11.466000,25.038000,61.887850
+No11=37.440000,24.804000,50.869938
+No12=98.514000,57.564000,74.312305
+No13=101.790000,51.714000,74.077882
+No14=92.664000,57.798000,73.843458
+No15=109.044000,32.292000,54.620717
+No16=90.558000,15.678000,45.947040
+No17=77.220000,16.614000,45.478193
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.100000
+[spline torsion]
+display_range_max=0.100000
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[remove_region]
+num=5
+No1=28.409223,45.662598,83.000000
+radius1=2.000000
+No2=26.606326,45.460716,83.000000
+radius2=2.000000
+No3=27.523424,46.424661,83.000000
+radius3=2.000000
+No4=27.078563,45.947181,83.000000
+radius4=2.000000
+No5=27.612115,45.692336,84.000000
+radius5=2.000000
+[laplacianFiltering]
+lamda=0.5
+iterative number=5
+mode=2
+[removal_points]
+radius=1.000000
+[spline]
+step_knot_value=0.010000
+numControlPoints=8
+[mesh color]
+index=10

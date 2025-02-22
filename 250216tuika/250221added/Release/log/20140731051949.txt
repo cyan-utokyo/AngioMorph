@@ -1,0 +1,398 @@
+---- load DICOM ----
+U:\data\shojima\1969female\20091019-CT_SN5
+input voxel : size = 512 512 320 : res= 0.430000 0.430000 0.500000 
+debug:input voxel : size = 512 512 320 : res= 0.430000 0.430000 0.500000 
+---- histogram ----
+-500 : 54315828
+-450 : 170509
+-400 : 154783
+-350 : 128523
+-300 : 109102
+-250 : 104442
+-200 : 107371
+-150 : 515854
+-100 : 1646836
+-50 : 1626499
+0 : 10018244
+50 : 7886081
+100 : 912226
+150 : 433162
+200 : 304695
+250 : 212509
+300 : 172504
+350 : 151588
+400 : 129009
+450 : 116621
+500 : 109139
+550 : 104562
+600 : 101017
+650 : 98635
+700 : 98023
+750 : 98500
+800 : 100067
+850 : 103200
+900 : 107985
+950 : 112997
+1000 : 3635569
+---- addMesh ----
+
+---- extracting arteries by resion growing ----
+512 512 372 , 0.430000 0.430000 0.430108
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+1024 1024 744 , 0.215000 0.215000 0.215054

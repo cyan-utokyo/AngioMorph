@@ -1,0 +1,48 @@
+---- load DICOM ----
+U:\data\Simulation\CAS2_70Y_M\CAS2_MRA_head_preope
+input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.733823 
+debug:input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.733823 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 5330841
+50 : 1466914
+100 : 2159049
+150 : 546277
+200 : 48494
+250 : 11345
+300 : 6056
+350 : 4348
+400 : 3552
+450 : 2634
+500 : 1807
+550 : 1464
+600 : 973
+650 : 505
+700 : 225
+750 : 83
+800 : 39
+850 : 19
+900 : 8
+950 : 5
+1000 : 2
+
+---- extracting arteries by resion growing ----
+576 640 232 , 0.328125 0.328125 0.328955
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+---- addMesh ----
+---- addMesh ----

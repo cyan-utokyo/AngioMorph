@@ -1,0 +1,99 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=U:\data\hayakawa\7140150_20090421_060Y_M_020
+key_dicom=*.dcm
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1.000000
+region growing=1050
+voxel gaussian=0
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1000
+z_step=2
+
+[region growing]
+threshold radius=1.000000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=400
+threshold ct-max=800
+color_index=2
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=30.000000
+[cross section]
+divide_angle=60
+[roi]
+min_z=176
+max_z=440
+[user_assigned_area]
+sw=0
+[removal_points]
+radius=1.000000
+[spline fitting]
+length step=5.000000
+[spline]
+step_knot_value=0.020000
+[spline curvature]
+display_range_max=0.300000
+[spline torsion]
+display_range_max=0.100000
+[seed_points]
+num=1
+No1=29.725753,50.633684,50.000000
+ct1=658
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[thinning_points]
+num=6
+No1=24.336000,57.798000,107.525622
+No2=22.932000,53.586000,109.399707
+No3=27.144000,51.012000,108.696925
+No4=32.526000,38.376000,108.931186
+No5=29.952000,51.012000,47.086384
+No6=37.206000,41.184000,44.040996
+[remove_region]
+num=0
+[mesh color]
+blend=0.1

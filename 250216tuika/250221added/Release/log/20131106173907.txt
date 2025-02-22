@@ -1,0 +1,3 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000003
+input voxel : size = 512 512 86 : res= 0.650391 0.650391 3.000000 

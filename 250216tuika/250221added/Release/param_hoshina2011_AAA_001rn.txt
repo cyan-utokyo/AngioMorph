@@ -1,0 +1,92 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=150
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=150
+
+expanding_ratio=2
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+voxel gaussian=0
+voxel expanding=2
+
+[file]
+dir_dicom=U:\data\hoshina\DICOM\00000001
+key_dicom=*.*
+[DICOM_visualization]
+min_value=1100
+max_value=2000
+[region growing]
+threshold radius=4
+threshold ct-min=1200
+threshold ct-max=1500
+[prunning length]
+prunning length=40

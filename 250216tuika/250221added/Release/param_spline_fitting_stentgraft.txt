@@ -1,0 +1,7 @@
+[spline_fitting]
+degree=3,5
+numCP=15,40
+step_k=0.1
+lamda2d=0.1,1.0
+lamda3d=0.1,1.0
+m_sigma0=5

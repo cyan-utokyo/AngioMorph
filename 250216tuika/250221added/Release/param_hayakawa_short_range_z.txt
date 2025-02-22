@@ -1,0 +1,128 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=U:\data\hayakawa\7140150_20090421_060Y_M_009
+key_dicom=*.dcm
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1.000000
+region growing=1050
+voxel gaussian=0
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1000
+z_step=2
+
+[region growing]
+threshold radius=1.200000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=400
+threshold ct-max=800
+color_index=2
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=30.000000
+[cross section]
+divide_angle=10
+[roi]
+min_z=176
+max_z=453
+[seed_points]
+num=4
+No1=96.109083,53.695341,80.000000
+ct1=681
+No2=25.142885,51.128169,80.000000
+ct2=693
+No3=23.890935,57.259590,96.250000
+ct3=658
+No4=25.752553,50.116604,96.250000
+ct4=647
+No5=19.900000,50.700000,78.250000
+ct5=1442.000000
+No6=26.400000,57.200000,81.750000
+ct6=1514.000000
+No7=19.900000,58.100000,81.750000
+ct7=1332.000000
+No8=19.700000,53.600000,81.750000
+ct8=1204.000000
+No9=19.700000,53.700000,84.000000
+ct9=1149.000000
+No10=22.700000,51.800000,84.000000
+ct10=1392.000000
+No11=22.500000,52.900000,86.250000
+ct11=1416.000000
+No12=28.400000,47.200000,53.750000
+ct12=822.000000
+[thinning_points]
+num=12
+No1=36.972000,41.184000,44.275256
+No2=29.718000,51.012000,47.789165
+No3=89.856000,46.800000,44.275256
+No4=92.196000,52.182000,46.383602
+No5=77.454000,17.082000,94.875549
+No6=24.570000,57.798000,110.102489
+No7=22.698000,53.820000,112.679356
+No8=27.378000,50.544000,112.210835
+No9=95.472000,46.566000,112.445095
+No10=96.642000,56.394000,112.679356
+No11=95.706000,51.480000,112.210835
+No12=95.472000,60.372000,111.508053
+[user_assigned_area]
+sw=0
+[spline fitting]
+length step=3.000000
+[spline curvature]
+display_range_max=0.200000
+[spline torsion]
+display_range_max=0.200000
+[removal_points]
+radius=1.000000
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[remove_region]
+num=0
+[mesh color]
+blend=0.1
+index=10
+[spline]
+step_knot_value=0.000000

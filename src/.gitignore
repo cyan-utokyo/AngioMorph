@@ -1,0 +1,5 @@
+# 忽略所有 .xlsx 文件
+*.xlsx
+
+# 忽略指定目录下的所有文件
+250216tuika/250221added/Release/

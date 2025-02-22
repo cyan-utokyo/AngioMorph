@@ -1,0 +1,86 @@
+---- load DICOM ----
+U:\data\Simulation\ボランティア_澤田_30Y\DICOM_Data_MRA
+input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.691508 
+debug:input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.691508 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 5052046
+50 : 1393400
+100 : 2423329
+150 : 639616
+200 : 45381
+250 : 10504
+300 : 5332
+350 : 3711
+400 : 3027
+450 : 2646
+500 : 2042
+550 : 1497
+600 : 1027
+650 : 567
+700 : 245
+750 : 147
+800 : 72
+850 : 36
+900 : 10
+950 : 5
+1000 : 0
+
+---- extracting arteries by resion growing ----
+576 640 219 , 0.328125 0.328125 0.328387
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+576 640 219 , 0.328125 0.328125 0.328387
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+576 640 219 , 0.328125 0.328125 0.328387
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+576 640 219 , 0.328125 0.328125 0.328387
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+576 640 219 , 0.328125 0.328125 0.328387
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----

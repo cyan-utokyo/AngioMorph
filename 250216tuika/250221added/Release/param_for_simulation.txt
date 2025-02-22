@@ -1,0 +1,2 @@
+[1D0D_simulation]
+dir_dicom=D:\koba\1D0D

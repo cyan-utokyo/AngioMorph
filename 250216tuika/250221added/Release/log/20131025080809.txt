@@ -1,0 +1,66 @@
+---- load DICOM ----
+U:\data\Simulation\CAS1_78Y_M\CAS1_postope_MRA
+input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.697554 
+debug:input voxel : size = 288 320 104 : res= 0.656250 0.656250 0.697554 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 5697123
+50 : 1811550
+100 : 1689011
+150 : 341243
+200 : 27326
+250 : 5536
+300 : 3330
+350 : 2659
+400 : 2227
+450 : 1873
+500 : 1313
+550 : 779
+600 : 442
+650 : 165
+700 : 59
+750 : 3
+800 : 0
+850 : 0
+900 : 1
+950 : 0
+1000 : 0
+
+---- extracting arteries by resion growing ----
+288 320 110 , 0.656250 0.656250 0.659506
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+864 960 331 , 0.218750 0.218750 0.219171
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+864 960 331 , 0.218750 0.218750 0.219171
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----

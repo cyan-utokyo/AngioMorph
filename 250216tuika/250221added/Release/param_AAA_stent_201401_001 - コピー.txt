@@ -1,0 +1,508 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=150
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=150
+
+expanding_ratio=2
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+voxel gaussian=0
+voxel expanding=1.000000
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+
+[file]
+dir_dicom=U:\data\hoshina\DICOM\00000001
+key_dicom=*.*
+modeUnsignedShort=0
+[DICOM_visualization]
+min_value=800
+max_value=2000
+[region growing]
+threshold radius=3.000000
+threshold ct-min=1150
+threshold ct-max=1500
+color_index=3
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=1
+[prunning length]
+prunning length=20.000000
+[cross section]
+divide_angle=20
+[roi]
+min_z=0
+max_z=80
+[seed_points]
+num=4
+No1=119.977709,171.647220,168.000022
+ct1=3394
+No2=124.609590,188.202516,168.000022
+ct2=1282
+No3=172.142908,157.233450,33.000004
+ct3=1291
+No4=140.944400,161.325642,33.000004
+ct4=1276
+No5=151.300000,158.600000,170.727281
+ct5=1765.000000
+No6=176.900000,165.400000,176.717712
+ct6=1912.000000
+No7=183.700000,158.100000,176.717712
+ct7=2077.000000
+No8=176.700000,147.500000,176.717712
+ct8=4000.000000
+No9=164.700000,151.600000,176.717712
+ct9=2012.000000
+No10=177.300000,166.200000,176.717712
+ct10=1761.000000
+No11=174.500000,164.500000,173.722497
+ct11=1290.000000
+No12=167.800000,156.100000,173.722497
+ct12=1264.000000
+No13=161.500000,157.000000,173.722497
+ct13=1029.000000
+[thinning_points]
+num=7
+No1=158.044922,143.736328,155.702433
+No2=154.792969,170.402344,203.260080
+No3=173.003906,201.621094,229.319064
+No4=199.669922,208.125000,0.651475
+No5=204.873047,177.556641,0.651475
+No6=117.070313,203.572266,6.514746
+No7=106.013672,183.410156,1.302949
+No8=106.664063,185.361328,5.211797
+No9=197.718750,196.417969,5.211797
+No10=202.271484,177.556641,5.211797
+No11=198.369141,203.572266,0.651475
+No12=204.222656,178.207031,0.651475
+[spline fitting]
+length step=30.000000
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.050000
+[spline torsion]
+display_range_max=0.100000
+[seed_points1]
+num=2
+No1=165.358660,190.989916,165.000021
+ct1=1151
+No2=111.994104,198.887407,168.000022
+ct2=1211
+[seed_points2]
+num=4
+No1=175.012158,154.250493,42.000005
+ct1=1306
+No2=141.695690,158.809783,36.000005
+ct2=1287
+No3=120.726555,172.223504,168.000022
+ct3=3574
+No4=169.496484,140.236965,57.000007
+ct4=3575
+[seed_points3]
+num=2
+No1=120.811962,172.916531,168.000022
+ct1=3296
+No2=173.181978,148.135919,60.000008
+ct2=2145
+[seed_points4]
+num=1
+No1=174.228599,152.798480,36.000005
+ct1=1297
+[remove_region]
+num=1
+No1=157.177730,212.027344,204.341269
+radius1=2.000000
+No2=143.651138,207.474609,182.173569
+radius2=2.000000
+No3=145.828933,207.474609,181.513605
+radius3=2.000000
+No4=146.730550,207.474609,180.456638
+radius4=2.000000
+No5=143.359583,207.474609,180.045328
+radius5=2.000000
+No6=143.390038,206.173828,182.740571
+radius6=2.000000
+No7=144.921357,206.173828,182.720682
+radius7=2.000000
+No8=145.683200,206.173828,182.598643
+radius8=2.000000
+No9=137.882813,178.197616,173.052647
+radius9=2.000000
+No10=137.882813,178.636759,174.727592
+radius10=2.000000
+No11=137.882813,179.445487,177.754885
+radius11=2.000000
+No12=137.882813,181.047818,179.138973
+radius12=2.000000
+No13=137.882813,178.788112,178.986350
+radius13=2.000000
+No14=137.882813,177.152151,176.696440
+radius14=2.000000
+No15=137.882813,176.880208,174.439266
+radius15=2.000000
+No16=137.882813,175.183112,173.414220
+radius16=2.000000
+No17=137.882813,177.474929,175.718036
+radius17=2.000000
+No18=137.882813,180.844516,177.229707
+radius18=2.000000
+No19=110.412663,202.271484,161.402604
+radius19=2.000000
+No20=110.731902,202.271484,162.244661
+radius20=2.000000
+No21=109.792803,202.271484,162.574815
+radius21=2.000000
+No22=113.167969,196.073406,166.979146
+radius22=2.000000
+No23=113.167969,195.286845,169.869981
+radius23=2.000000
+No24=113.167969,194.949651,171.825028
+radius24=2.000000
+No25=113.167969,194.357574,173.591899
+radius25=2.000000
+No26=113.167969,193.602550,175.472972
+radius26=2.000000
+No27=113.818359,196.364343,165.424052
+radius27=2.000000
+No28=113.818359,195.502382,168.746585
+radius28=2.000000
+No29=113.818359,194.502158,172.038637
+radius29=2.000000
+No30=113.818359,193.764343,174.648548
+radius30=2.000000
+No31=113.818359,194.502158,172.038637
+radius31=2.000000
+No32=114.468750,196.723289,166.983427
+radius32=2.000000
+No33=114.468750,195.924251,170.329182
+radius33=2.000000
+No34=114.468750,195.466491,171.413225
+radius34=2.000000
+No35=114.468750,194.530382,173.720733
+radius35=2.000000
+No36=114.468750,194.031003,175.084566
+radius36=2.000000
+No37=115.119141,195.698894,167.945433
+radius37=2.000000
+No38=115.119141,195.166180,171.485694
+radius38=2.000000
+No39=115.119141,194.473912,174.125035
+radius39=2.000000
+No40=115.119141,193.473045,176.858009
+radius40=2.000000
+No41=115.119141,193.223042,177.540666
+radius41=2.000000
+No42=115.769531,197.543679,165.579891
+radius42=2.000000
+No43=115.769531,195.904008,170.557361
+radius43=2.000000
+No44=115.769531,194.566709,173.541572
+radius44=2.000000
+No45=115.769531,194.332820,175.096685
+radius45=2.000000
+No46=115.769531,192.565954,177.003673
+radius46=2.000000
+No47=112.517578,196.308309,164.103463
+radius47=2.000000
+No48=112.517578,195.720306,166.166847
+radius48=2.000000
+No49=112.517578,194.806505,169.475475
+radius49=2.000000
+No50=112.517578,194.352358,172.565393
+radius50=2.000000
+No51=112.517578,193.964647,174.232493
+radius51=2.000000
+No52=116.419922,197.642496,164.498558
+radius52=2.000000
+No53=116.419922,196.577424,166.555271
+radius53=2.000000
+No54=116.419922,196.037919,169.246585
+radius54=2.000000
+No55=116.419922,195.428911,170.891725
+radius55=2.000000
+No56=117.070313,198.505631,165.641441
+radius56=2.000000
+No57=117.070313,197.881110,167.315355
+radius57=2.000000
+No58=117.070313,197.005814,170.067031
+radius58=2.000000
+No59=117.070313,196.227479,172.151181
+radius59=2.000000
+No60=118.371094,200.780498,168.231477
+radius60=2.000000
+No61=118.371094,198.996804,172.504521
+radius61=2.000000
+No62=118.371094,198.308632,175.320760
+radius62=2.000000
+No63=118.371094,197.141851,177.539798
+radius63=2.000000
+No64=115.769531,197.163976,169.087166
+radius64=2.000000
+No65=117.720703,198.571694,169.277658
+radius65=2.000000
+No66=174.955078,162.463150,41.900420
+radius66=2.000000
+No67=175.605469,162.183405,40.742351
+radius67=2.000000
+No68=175.605469,162.183405,40.742351
+radius68=2.000000
+No69=175.605469,162.183405,40.742351
+radius69=2.000000
+No70=175.605469,162.394751,39.183731
+radius70=2.000000
+No71=175.605469,162.394751,39.183731
+radius71=2.000000
+No72=175.605469,162.394751,39.183731
+radius72=2.000000
+No73=173.654297,162.932093,42.328349
+radius73=2.000000
+No74=173.654297,162.932093,42.328349
+radius74=2.000000
+No75=104.739635,165.450150,141.000018
+radius75=2.000000
+[threshold]
+min=1400
+max=3000
+[DICOM_visualization 1]
+min_value=800
+max_value=2000
+[roi 1]
+min_z=53
+max_z=62
+[preprocess 1]
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+voxel expanding=1.000000
+[region growing 1]
+threshold radius=1.000000
+threshold ct-min=1150
+threshold ct-max=5000
+color_index=5
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 1]
+sw=0
+[prunning length 1]
+prunning length=0.000000
+[spline fitting 1]
+length step=10.000000
+[cross section 1]
+divide_angle=0
+[spline curvature 1]
+display_range_max=0.500000
+[spline torsion 1]
+display_range_max=0.500000
+[DICOM_visualization 2]
+min_value=800
+max_value=2000
+[roi 2]
+min_z=0
+max_z=16
+[preprocess 2]
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+voxel expanding=1.000000
+[region growing 2]
+threshold radius=2.000000
+threshold ct-min=1200
+threshold ct-max=5000
+color_index=5
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 2]
+sw=0
+[prunning length 2]
+prunning length=0.000000
+[spline fitting 2]
+length step=0.000000
+[cross section 2]
+divide_angle=0
+[spline curvature 2]
+display_range_max=0.000000
+[spline torsion 2]
+display_range_max=0.000000
+[VolumeOperation]
+ErosionIterativeNumber=1
+DilationIterativeNumber=1
+[mesh color]
+index=2
+blend=0.1
+[removal_points]
+radius=3.000000
+[DICOM_visualization 3]
+min_value=800
+max_value=2000
+[roi 3]
+min_z=6
+max_z=71
+[preprocess 3]
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+voxel expanding=1.000000
+[region growing 3]
+threshold radius=0.500000
+threshold ct-min=1400
+threshold ct-max=5000
+color_index=12
+modeRemoveHoleRegion=0
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 3]
+sw=0
+[removal_points 3]
+radius=1.000000
+[prunning length 3]
+prunning length=0.000000
+[spline fitting 3]
+length step=30.000000
+[cross section 3]
+divide_angle=0
+[spline curvature 3]
+display_range_max=0.050000
+[spline torsion 3]
+display_range_max=0.100000
+[removal_points 1]
+radius=1.500000
+[spline]
+step_knot_value=0.010000
+numControlPoints=12
+numControlPoints_min=6
+numControlPoints_max=30
+[DICOM_visualization 4]
+min_value=800
+max_value=2000
+[roi 4]
+min_z=0
+max_z=16
+[preprocess 4]
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+voxel expanding=1.000000
+[region growing 4]
+threshold radius=2.000000
+threshold ct-min=1200
+threshold ct-max=10000
+color_index=2
+modeRemoveHoleRegion=1
+closingNumber=2
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 4]
+sw=0
+[removal_points 4]
+radius=1.000000
+[prunning length 4]
+prunning length=0.000000
+[spline fitting 4]
+length step=0.000000
+[cross section 4]
+divide_angle=0
+[spline curvature 4]
+display_range_max=0.000000
+[spline torsion 4]
+display_range_max=0.000000
+[spline 1]
+step_knot_value=0.000000
+[removal_points 2]
+radius=3.000000
+[spline 2]
+step_knot_value=0.000000
+[spline 3]
+step_knot_value=0.010000
+[ViewPosition]
+number=3
+matrix1=-0.9127238236,-0.0518873101,-0.4052689586,0.0000000000,-0.3540585156,-0.3945789418,0.8479092087,0.0000000000,-0.2039063249,0.9173958610,0.3417704565,0.0000000000,0.0000000000,0.0000000000,0.0000000000,1.0000000000
+qt1=0.0928273816,-0.1871394277,0.5423039796,0.8137986886
+view1=-192.0000000000,-92.0000000000,-460.0000000000
+ctrt1=166.5000000000,166.5000000000,120.0000155000
+matrix2=0.9996656330,0.0019706324,0.0257825305,0.0000000000,-0.0051156265,0.9924563372,0.1224918328,0.0000000000,-0.0253466494,-0.1225827693,0.9921345735,0.0000000000,0.0000000000,0.0000000000,0.0000000000,1.0000000000
+qt2=0.9980301278,0.0613895802,-0.0128075242,0.0017750614
+view2=-160.0000000000,-136.0000000000,-660.0000000000
+ctrt2=166.5000000000,166.5000000000,120.0000155000
+matrix3=1.0000000000,0.0000000000,0.0000000000,0.0000000000,0.0000000000,1.0000000000,0.0000000000,0.0000000000,0.0000000000,0.0000000000,1.0000000000,0.0000000000,0.0000000000,0.0000000000,0.0000000000,1.0000000000
+qt3=1.0000000000,0.0000000000,0.0000000000,0.0000000000
+view3=-144.0000000000,-160.0000000000,-660.0000000000
+ctrt3=166.5000000000,166.5000000000,120.0000155000
+[spline 4]
+step_knot_value=0.000000
+[OnProcessSearchstentregion]
+radius_min=5
+radius_max=20
+threshold_ct=1500
+threshold_count=50

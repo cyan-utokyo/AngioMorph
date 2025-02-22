@@ -1,0 +1,74 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000000
+input voxel : size = 512 512 81 : res= 0.650391 0.650391 3.000000 
+debug:input voxel : size = 512 512 81 : res= 0.650391 0.650391 3.000000 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 6424086
+50 : 3582680
+100 : 1364842
+150 : 512452
+200 : 279426
+250 : 158513
+300 : 104451
+350 : 84237
+400 : 73432
+450 : 72800
+500 : 74338
+550 : 71849
+600 : 63995
+650 : 55720
+700 : 52579
+750 : 57223
+800 : 67054
+850 : 147654
+900 : 1883721
+950 : 1456727
+1000 : 4645885
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+131.918599 177.552387 184.068204 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000
+130.960018 176.003880 182.822086 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000
+130.960018 176.003880 182.822086 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000
+131.181952 176.403285 183.112605 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000
+131.069951 176.204846 182.965447 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000

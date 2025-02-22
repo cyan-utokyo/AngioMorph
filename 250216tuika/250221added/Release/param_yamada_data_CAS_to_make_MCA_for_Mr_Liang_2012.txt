@@ -1,0 +1,73 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=U:\data\Simulation\CAS1_78Y_M\CAS1_postope_MRA
+key_dicom=*.*
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=2.000000
+region growing=1050
+voxel gaussian=0.4
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=0
+max_value=700
+z_step=2
+
+[region growing]
+threshold radius=1.000000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=200
+threshold ct-max=1000
+color_index=2
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=20.000000
+[cross section]
+divide_angle=10
+[roi]
+min_z=0
+max_z=0
+[user_assigned_area]
+sw=0
+[removal_points]
+radius=1.000000
+[spline fitting]
+length step=0.000000
+[spline curvature]
+display_range_max=0.000000
+[spline torsion]
+display_range_max=0.000000

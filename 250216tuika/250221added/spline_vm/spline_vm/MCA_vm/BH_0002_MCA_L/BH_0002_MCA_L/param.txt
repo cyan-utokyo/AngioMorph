@@ -1,0 +1,11 @@
+[spline_fitting_result]
+degree=5
+numKnot=121
+lamda1d=0.000000
+lamda2d=0.000000
+lamda3d=0.000000
+lamda4d=0.001000
+step_k=0.100000
+AIC=2012.858720
+sigma0=1.000000
+sigma_opt=0.000007

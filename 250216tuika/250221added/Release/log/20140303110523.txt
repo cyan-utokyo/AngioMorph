@@ -1,0 +1,86 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000002
+input voxel : size = 512 512 74 : res= 0.650391 0.650391 3.000000 
+debug:input voxel : size = 512 512 74 : res= 0.650391 0.650391 3.000000 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 6446765
+50 : 3462460
+100 : 1089837
+150 : 362721
+200 : 205251
+250 : 132005
+300 : 80105
+350 : 65986
+400 : 58912
+450 : 57353
+500 : 58220
+550 : 55242
+600 : 52909
+650 : 50648
+700 : 50938
+750 : 51450
+800 : 49484
+850 : 76855
+900 : 1538601
+950 : 1135663
+1000 : 4317251
+
+---- extracting arteries by resion growing ----
+512 512 341 , 0.650391 0.650391 0.651026
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 341 , 0.650391 0.650391 0.651026
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 341 , 0.650391 0.650391 0.651026
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 341 , 0.650391 0.650391 0.651026
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+152.191406 147.641205 27.994135 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+152.841797 147.641205 27.343109 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+152.193939 148.289063 27.343109 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+152.844330 147.638672 27.343109 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+152.191406 148.289063 27.345652 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+152.841797 147.638672 27.345652 , -0.577350 -0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+154.142578 149.587311 25.390030 , -0.003922 0.999985 -0.003922 , radius=0.000000 , circumference=0.000000
+153.494720 148.939453 25.390030 , -0.999992 0.000000 -0.003906 , radius=0.000000 , circumference=0.000000
+152.191406 148.291595 27.343109 , -0.578102 -0.575844 -0.578102 , radius=0.000000 , circumference=0.000000
+152.191406 148.939453 26.694626 , -0.003906 0.000000 -0.999992 , radius=0.000000 , circumference=0.000000

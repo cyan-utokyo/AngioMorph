@@ -1,0 +1,88 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000004\original
+input voxel : size = 512 512 213 : res= 0.644531 0.644531 3.000000 
+debug:input voxel : size = 512 512 213 : res= 0.644531 0.644531 3.000000 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 16505033
+50 : 10297621
+100 : 3526139
+150 : 1479932
+200 : 1165678
+250 : 690412
+300 : 448107
+350 : 327984
+400 : 263159
+450 : 238661
+500 : 232603
+550 : 218003
+600 : 191501
+650 : 156074
+700 : 154606
+750 : 167997
+800 : 199092
+850 : 371715
+900 : 3649023
+950 : 3263409
+1000 : 12289923
+
+---- extracting arteries by resion growing ----
+512 512 991 , 0.644531 0.644531 0.644803
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 991 , 0.644531 0.644531 0.644803
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 991 , 0.644531 0.644531 0.644803
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 991 , 0.644531 0.644531 0.644803
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 991 , 0.644531 0.644531 0.644803
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+127.381868 135.606758 283.216537 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000
+127.381868 135.606758 283.216537 , 0.000000 0.000000 0.000000 , radius=0.000000 , circumference=0.000000

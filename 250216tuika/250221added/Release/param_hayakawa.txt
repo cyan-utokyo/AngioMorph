@@ -1,0 +1,114 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=U:\data\hayakawa\009select
+key_dicom=*.dcm
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1.000000
+region growing=1050
+voxel gaussian=0
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1000
+z_step=2
+
+[region growing]
+threshold radius=1.200000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=400
+threshold ct-max=800
+color_index=4
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=30.000000
+[cross section]
+divide_angle=10
+[roi]
+min_z=0
+max_z=300
+[spline fitting]
+length step=3.000000
+[seed_points]
+num=3
+No1=97.878009,55.150342,37.500000
+ct1=668
+No2=25.576470,50.295034,37.500000
+ct2=705
+No3=23.336442,56.317723,41.250000
+ct3=650
+[thinning_points]
+num=17
+No1=92.898000,58.032000,73.140187
+No2=101.322000,51.246000,73.609034
+No3=34.866000,43.290000,0.468847
+No4=33.462000,51.012000,0.234424
+No5=90.324000,45.630000,0.468847
+No6=92.898000,51.714000,0.234424
+No7=26.676000,57.330000,74.781153
+No8=20.826000,57.096000,74.312305
+No9=26.442000,49.608000,74.312305
+No10=11.466000,25.038000,61.887850
+No11=37.440000,24.804000,50.869938
+No12=98.514000,57.564000,74.312305
+No13=101.790000,51.714000,74.077882
+No14=92.664000,57.798000,73.843458
+No15=109.044000,32.292000,54.620717
+No16=90.558000,15.678000,45.947040
+No17=77.220000,16.614000,45.478193
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.100000
+[spline torsion]
+display_range_max=0.100000
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[remove_region]
+num=0
+[laplacianFiltering]
+lamda=0.5
+iterative number=5
+mode=2
+[removal_points]
+radius=0.000000

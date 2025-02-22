@@ -1,0 +1,176 @@
+[comment]
+早川先生提供のデータを処理するためにパラメータファイル
+
+[file]
+dir_dicom=U:\data\shojima\201303-aneurysm\E9ECE4EA
+key_dicom=*.*
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1.000000
+region growing=1050
+voxel gaussian=0
+modeSmoothing6Neighbor=0
+modeCubeResolution=1
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1200
+z_step=2
+
+[region growing]
+threshold radius=1.500000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=220
+threshold ct-max=450
+color_index=3
+modeRemoveHoleRegion=1
+closingNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=10.000000
+[spline fitting]
+the number of control points=10
+length step=5.000000
+[test_data]
+step z=20
+radius x=50
+radius y=50
+[seed_points]
+num=1
+No1=63.980751,36.015943,55.500000
+ct1=284
+No2=63.980751,36.015943,55.500000
+ct2=284
+No3=63.980751,36.015943,55.500000
+ct3=284
+No4=63.980751,36.015943,55.500000
+ct4=284
+No5=63.980751,36.015943,55.500000
+ct5=284
+No6=63.980751,36.015943,55.500000
+ct6=284
+No7=42.712899,91.010647,32.250000
+ct7=327
+No8=42.712899,91.010647,32.250000
+ct8=327
+No9=51.915494,56.129068,65.250000
+ct9=300
+No10=124.089304,96.355227,66.000000
+ct10=48
+[thinning_points]
+num=13
+No1=67.196000,35.738000,58.902276
+No2=62.274000,43.442000,67.041499
+No3=46.224000,42.372000,67.041499
+No4=31.030000,38.306000,62.971888
+No5=46.010000,38.734000,53.333333
+No6=65.484000,38.734000,51.405622
+No7=95.016000,43.014000,70.254351
+No8=26.322000,77.254000,13.922356
+No9=76.826000,76.184000,13.922356
+No10=77.040000,88.810000,13.708166
+No11=32.528000,103.148000,31.057564
+No12=49.006000,72.974000,43.480589
+No13=64.414000,64.628000,47.336011
+No14=105.000000,148.968750,38.323290
+No15=105.000000,148.968750,38.323290
+No16=105.000000,148.968750,38.323290
+No17=105.000000,148.968750,38.323290
+No18=105.000000,148.968750,38.323290
+No19=105.000000,148.968750,38.323290
+No20=105.000000,148.968750,38.323290
+No21=105.000000,148.968750,38.323290
+No22=105.000000,148.968750,38.323290
+No23=105.000000,148.968750,38.323290
+No24=105.000000,148.968750,38.323290
+No25=105.000000,148.968750,38.323290
+No26=105.000000,148.968750,38.323290
+No27=105.000000,148.968750,38.323290
+No28=105.000000,148.968750,38.323290
+No29=105.000000,148.968750,38.323290
+No30=105.000000,148.968750,38.323290
+No31=105.000000,148.968750,38.323290
+No32=105.000000,148.968750,38.323290
+No33=105.000000,148.968750,38.323290
+No34=105.000000,148.968750,38.323290
+No35=105.000000,148.968750,38.323290
+No36=105.000000,148.968750,38.323290
+[cross section]
+divide_angle=12
+[roi]
+min_z=48
+max_z=319
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.200000
+[spline torsion]
+display_range_max=0.200000
+[remove_region]
+num=0
+[VolumeOperation]
+DilationIterativeNumber=1
+[seed_points1]
+num=1
+No1=63.900111,42.554634,30.250000
+ct1=758
+No2=52.354878,56.272154,62.750000
+ct2=295
+No3=52.354878,56.272154,62.750000
+ct3=295
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[DICOM_visualization 1]
+min_value=-200
+max_value=1000
+[roi 1]
+min_z=32
+max_z=358
+[preprocess 1]
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+voxel expanding=1.000000
+[region growing 1]
+threshold radius=0.500000
+threshold ct-min=450
+threshold ct-max=3000
+color_index=4
+modeRemoveHoleRegion=1
+closingNumber=0
+[user_assigned_area 1]
+sw=0
+[prunning length 1]
+prunning length=0.000000
+[spline fitting 1]
+length step=5.000000
+[cross section 1]
+divide_angle=0
+[spline curvature 1]
+display_range_max=0.200000
+[spline torsion 1]
+display_range_max=0.200000

@@ -1,0 +1,238 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=150
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=150
+
+expanding_ratio=2
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+voxel expanding=1.000000
+
+[file]
+modeUnsignedShort=0
+dir_dicom=D:\data\hoshina\DICOM\00000003select
+key_dicom=*
+[DICOM_visualization]
+min_value=400
+max_value=1400
+[roi]
+min_z=0
+max_z=90
+[region growing]
+threshold radius=3.000000
+threshold ct-min=1200
+threshold ct-max=1500
+color_index=1
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+[user_assigned_area]
+sw=0
+[removal_points]
+radius=1.000000
+[prunning length]
+prunning length=0.000000
+[spline fitting]
+length step=5.000000
+[spline]
+step_knot_value=0.100000
+numControlPoints_min=7
+numControlPoints_max=20
+[cross section]
+divide_angle=0
+[spline curvature]
+display_range_max=0.100000
+[spline torsion]
+display_range_max=0.100000
+[seed_points]
+num=2
+No1=113.719621,177.007150,189.000000
+ct1=1309
+No2=127.839261,191.725324,210.000000
+ct2=1315
+[seed_points1]
+num=8
+No1=132.733458,200.073966,210.000000
+ct1=2476
+No2=122.055445,182.833667,210.000000
+ct2=1877
+No3=149.561495,144.493285,99.000000
+ct3=1532
+No4=186.599638,147.635872,99.000000
+ct4=1116
+No5=183.271285,151.361970,99.000000
+ct5=1540
+No6=191.008619,156.473139,69.000000
+ct6=1099
+No7=187.686586,151.697626,84.000000
+ct7=1325
+No8=196.392661,162.046328,84.000000
+ct8=1772
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[thinning_points]
+num=7
+No1=163.248047,206.173828,259.317422
+No2=159.345703,163.248047,196.768496
+No3=180.808594,208.775391,231.952267
+No4=126.175781,198.369141,31.926014
+No5=112.517578,173.654297,0.651551
+No6=209.425781,203.572266,39.093079
+No7=233.490234,172.353516,0.651551
+[remove_region]
+num=0
+[DICOM_visualization 1]
+min_value=200
+max_value=1400
+[roi 1]
+min_z=65
+max_z=90
+[preprocess 1]
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+voxel expanding=1.000000
+[region growing 1]
+threshold radius=2.000000
+threshold ct-min=1200
+threshold ct-max=1500
+color_index=0
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 1]
+sw=0
+[removal_points 1]
+radius=1.000000
+[prunning length 1]
+prunning length=0.000000
+[spline fitting 1]
+length step=0.000000
+[spline 1]
+step_knot_value=0.000000
+[cross section 1]
+divide_angle=0
+[spline curvature 1]
+display_range_max=0.000000
+[spline torsion 1]
+display_range_max=0.000000
+[UserSpecifySegmentedRegions]
+radius=2
+[DICOM_visualization 2]
+min_value=200
+max_value=1400
+[roi 2]
+min_z=0
+max_z=90
+[preprocess 2]
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+voxel expanding=1.000000
+[region growing 2]
+threshold radius=0.500000
+threshold ct-min=1500
+threshold ct-max=5000
+color_index=2
+modeRemoveHoleRegion=0
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[user_assigned_area 2]
+sw=0
+[removal_points 2]
+radius=0.000000
+[prunning length 2]
+prunning length=0.000000
+[spline fitting 2]
+length step=0.000000
+[spline 2]
+step_knot_value=0.000000
+[cross section 2]
+divide_angle=0
+[spline curvature 2]
+display_range_max=0.000000
+[spline torsion 2]
+display_range_max=0.000000
+[OnProcessSearchstentregion]
+radius_min=5
+radius_max=30
+threshold_ct=1500
+threshold_count=20
+[mesh color]
+blend=0.1

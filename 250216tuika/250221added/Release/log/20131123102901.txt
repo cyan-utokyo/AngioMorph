@@ -1,0 +1,62 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000001
+input voxel : size = 512 512 81 : res= 0.650391 0.650391 3.000000 
+debug:input voxel : size = 512 512 81 : res= 0.650391 0.650391 3.000000 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 6859688
+50 : 3134725
+100 : 1233309
+150 : 407935
+200 : 246219
+250 : 145327
+300 : 89530
+350 : 71004
+400 : 63480
+450 : 61621
+500 : 59728
+550 : 56520
+600 : 52658
+650 : 49596
+700 : 51356
+750 : 56414
+800 : 64951
+850 : 219227
+900 : 1871584
+950 : 1315111
+1000 : 5123681
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475
+
+---- extracting arteries by resion growing ----
+512 512 373 , 0.650391 0.650391 0.651475

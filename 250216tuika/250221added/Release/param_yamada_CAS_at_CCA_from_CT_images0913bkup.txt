@@ -1,0 +1,114 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=300
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=300
+
+expanding_ratio=4
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+voxel gaussian=0
+voxel expanding=2
+
+[file]
+dir_dicom=U:\data\Simulation\CAS1_78Y_M\CAS1_preope_CTA_carotid_part2
+key_dicom=*.dcm
+[DICOM_visualization]
+min_value=-200
+max_value=700
+[region growing]
+threshold radius=2
+threshold ct-min=200
+threshold ct-max=400
+color_index=3
+[prunning length]
+prunning length=20
+[cross section]
+divide_angle=20
+[seed_points]
+num=2
+No1=106.700000,43.900000,37.500000
+ct1=365.000000
+No2=107.900000,50.600000,52.500000
+ct2=256.000000
+[thinning_points]
+num=6
+No1=108.410000,49.517000,42.857143
+No2=104.308000,46.587000,73.091977
+No3=97.276000,35.746000,0.293542
+No4=96.690000,35.160000,0.000000
+No5=106.359000,49.224000,59.295499
+No6=108.410000,50.396000,48.727984
+[delete_points]
+num=3
+No1=100.792000,40.727000,67.514677
+No2=100.792000,40.727000,67.221135
+No3=100.206000,41.313000,67.514677

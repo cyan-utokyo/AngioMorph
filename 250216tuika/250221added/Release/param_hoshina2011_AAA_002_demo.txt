@@ -1,0 +1,24 @@
+[load_dicom]
+search_key=*.dcm
+
+
+[file]
+dir_dicom=U:\data\hoshina\DICOM\00000002select
+key_dicom=*.*
+
+[DICOM_visualization]
+min_value=1100
+max_value=3000
+
+[region growing]
+threshold radius=2
+threshold ct-min=1200
+threshold ct-max=1550
+
+[prunning length]
+prunning length=50
+[preprocess]
+voxel gaussian=0.0
+voxel expanding=1
+[spline fitting]
+the number of control points=10

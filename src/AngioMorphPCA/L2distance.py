@@ -17,3 +17,7 @@ def calculate_l2_distance(b1, b2):
 # # 计算 L2 距离
 # l2_distance = calculate_l2_distance(b1, b2)
 # print("The L2 distance between b1 and b2 is:", l2_distance)
+
+
+
+

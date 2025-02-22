@@ -126,7 +126,7 @@ save_dir = mkdir("./", "geom_aligned_curves_{}".format(len(total_files)))
 # print (total_files)
 # np.save("total_files_85.npy", total_files)
 
-resample_num=121
+resample_num=75
 k_sampling_points = resample_num
 # cutoffs = [100,100,95,97]
 curves = []

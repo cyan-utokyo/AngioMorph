@@ -1,0 +1,268 @@
+---- load DICOM ----
+U:\data\hoshina\DICOM\00000004
+input voxel : size = 512 512 133 : res= 0.644531 0.644531 3.000000 
+debug:input voxel : size = 512 512 133 : res= 0.644531 0.644531 3.000000 
+---- histogram ----
+-500 : 0
+-450 : 0
+-400 : 0
+-350 : 0
+-300 : 0
+-250 : 0
+-200 : 0
+-150 : 0
+-100 : 0
+-50 : 0
+0 : 9650739
+50 : 6953883
+100 : 2291375
+150 : 712122
+200 : 410156
+250 : 237145
+300 : 159935
+350 : 128072
+400 : 112807
+450 : 110865
+500 : 115173
+550 : 112821
+600 : 101652
+650 : 81100
+700 : 83831
+750 : 96408
+800 : 121191
+850 : 249238
+900 : 2481379
+950 : 2381576
+1000 : 8273684
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+134.062500 193.359375 366.448303 , -0.577350 -0.577350 0.577350 , radius=0.000000 , circumference=0.000000
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+101.835938 176.923828 328.739899 , -0.894427 -0.447214 0.000000 , radius=0.000000 , circumference=0.000000
+161.455078 180.468750 318.426483 , 0.707107 -0.707107 0.000000 , radius=0.000000 , circumference=0.000000
+152.109375 185.947266 359.680115 , 0.577350 0.577350 -0.577350 , radius=0.000000 , circumference=0.000000
+181.435547 148.886719 256.546051 , 0.816497 0.408248 0.408248 , radius=0.000000 , circumference=0.000000
+104.414063 189.814453 302.956390 , -0.666667 -0.666667 -0.333333 , radius=0.000000 , circumference=0.000000
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+---- kb::removePoints ----
+- region growing
+---- kb::regionGrowing ----
+---- mist::remove_hole_region ----
+---- kb::operation_3d::masking_survive ----
+---- addMesh ----
+---- distance_transform ----
+
+---- extracting arteries by resion growing ----
+512 512 619 , 0.644531 0.644531 0.644588
+139.599822 130.353687 268.878106 , 0.000000 0.000000 0.000000 , radius=29.811111 , circumference=191.568659
+98.123007 158.835831 310.579434 , 0.000000 0.000000 0.000000 , radius=10.955556 , circumference=70.086974
+98.544301 141.959100 294.749990 , 0.000000 0.000000 0.000000 , radius=15.622222 , circumference=109.492267
+119.875629 137.734671 285.658421 , 0.000000 0.000000 0.000000 , radius=26.950000 , circumference=171.918108
+184.294344 145.556495 236.923259 , 0.000000 0.000000 0.000000 , radius=18.341667 , circumference=152.376402
+169.791122 137.597938 206.906895 , 0.000000 0.000000 0.000000 , radius=9.880556 , circumference=66.309220
+205.562378 149.789602 214.143668 , 0.000000 0.000000 0.000000 , radius=9.852778 , circumference=64.967034
+163.250133 127.569483 237.353809 , 0.000000 0.000000 0.000000 , radius=24.341667 , circumference=163.430767
+107.946517 167.855772 314.614286 , 0.000000 0.000000 0.000000 , radius=7.700000 , circumference=49.501427
+92.509914 148.567791 306.963029 , 0.000000 0.000000 0.000000 , radius=12.013889 , circumference=83.186128
+149.197567 128.722729 254.439757 , 0.000000 0.000000 0.000000 , radius=28.400000 , circumference=186.080963
+170.781916 144.372932 191.195998 , 0.000000 0.000000 0.000000 , radius=10.141667 , circumference=65.952942
+205.867209 163.150791 200.348744 , 0.000000 0.000000 0.000000 , radius=9.233333 , circumference=63.156355
+198.745026 144.426840 226.950328 , 0.000000 0.000000 0.000000 , radius=9.666667 , circumference=64.666564
+168.442276 132.516052 219.332268 , 0.000000 0.000000 0.000000 , radius=13.925000 , circumference=97.393648
+168.611542 129.787197 228.049187 , 0.000000 0.000000 0.000000 , radius=23.238889 , circumference=163.668882
+177.635316 145.137559 242.507559 , 0.000000 0.000000 0.000000 , radius=19.688889 , circumference=154.343248

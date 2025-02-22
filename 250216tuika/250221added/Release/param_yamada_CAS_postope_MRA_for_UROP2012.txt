@@ -1,0 +1,94 @@
+[comment]
+早川先生提供のデータを処理するためにパラメータファイル
+
+[file]
+dir_dicom=U:\data\Simulation\CAS1_78Y_M\CAS1_postope_MRA
+key_dicom=*.*
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=2
+region growing=1050
+voxel gaussian=0
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=0
+max_value=800
+z_step=2
+
+[region growing]
+threshold radius=1
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=180
+threshold ct-max=1000
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=10
+[seed_points]
+num=11
+No1=106.700000,89.200000,36.272825
+ct1=443.000000
+No2=112.000000,89.200000,36.272825
+ct2=73.000000
+No3=83.500000,85.700000,36.272825
+ct3=452.000000
+No4=92.900000,107.000000,36.272825
+ct4=434.000000
+No5=116.000000,103.500000,22.321738
+ct5=537.000000
+No6=75.000000,103.700000,22.321738
+ct6=568.000000
+No7=67.100000,111.000000,22.321738
+ct7=680.000000
+No8=107.300000,89.500000,45.341031
+ct8=203.000000
+No9=86.700000,93.300000,41.155705
+ct9=150.000000
+No10=103.700000,97.500000,41.155705
+ct10=205.000000
+No11=153.000000,60.500000,39.063042
+ct11=37.000000
+No12=87.500000,96.200000,40.458151
+ct12=78.000000
+No13=87.500000,96.200000,40.458151
+ct13=78.000000
+[thinning_points]
+num=14
+No1=69.562500,114.843750,0.000000
+No2=118.781250,120.093750,0.656522
+No3=123.375000,133.875000,0.000000
+No4=68.250000,133.218750,0.000000
+No5=98.437500,64.312500,71.560867
+No6=95.156250,68.250000,71.560867
+No7=134.531250,108.937500,71.560867
+No8=63.000000,63.656250,63.682607
+No9=63.000000,63.656250,63.026085
+No10=59.718750,100.406250,71.560867
+No11=56.437500,79.406250,70.904345
+No12=139.125000,82.687500,65.652172
+No13=83.343750,129.937500,67.621737
+No14=97.781250,137.812500,70.904345
+[delete_points]
+num=0
+[cross section]
+divide_angle=20

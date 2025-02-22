@@ -1,0 +1,3 @@
+#GCV degree numKnot L1 L2 L3 L4 residual 
+-34.8573 5 120 0 0 0 1 1.25964e-005 
+0 5 121 0 0 0 0 6.95234e-310 

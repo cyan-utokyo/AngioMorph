@@ -1,0 +1,171 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=300
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=300
+
+expanding_ratio=4
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+voxel gaussian=0
+voxel expanding=1.000000
+modeCubeResolution=1
+modeSmoothing6Neighbor=0
+bone threshold=600
+
+[file]
+dir_dicom=P:\U\yamada\_work\CAS2_70Y_M\CAS2_CTA_preope
+key_dicom=*.dcm
+modeUnsignedShort=0
+[DICOM_visualization]
+min_value=-200
+max_value=1000
+[region growing]
+threshold radius=0.500000
+threshold ct-min=200
+threshold ct-max=1000
+color_index=6
+modeRemoveHoleRegion=1
+closingNumber=1
+openingNumber=0
+erosionNumber=0
+[prunning length]
+prunning length=10.000000
+[cross section]
+divide_angle=20
+[seed_points]
+num=2
+No1=91.129394,65.706103,136.024335
+ct1=459
+No2=104.893836,66.755471,225.436882
+ct2=343
+No3=47.306280,64.482957,40.000000
+ct3=380
+No4=105.807578,55.855010,9.500000
+ct4=439
+No5=104.964207,69.761550,86.000000
+ct5=338
+No6=48.454619,71.498095,94.500000
+ct6=257
+No7=75.379243,79.612491,94.500000
+ct7=203
+No8=82.762261,81.021760,94.500000
+ct8=253
+No9=106.046103,71.588601,94.500000
+ct9=296
+No10=81.500000,94.900000,30.820551
+ct10=550.000000
+No11=77.100000,89.400000,44.029358
+ct11=553.000000
+No12=105.000000,93.300000,22.748502
+ct12=336.000000
+No13=92.700000,110.300000,34.489664
+ct13=944.000000
+[thinning_points]
+num=0
+No1=108.410000,49.517000,42.857143
+No2=104.308000,46.587000,73.091977
+No3=97.276000,35.746000,0.293542
+No4=96.690000,35.160000,0.000000
+No5=106.359000,49.224000,59.295499
+No6=108.410000,50.396000,48.727984
+[delete_points]
+num=3
+No1=100.792000,40.727000,67.514677
+No2=100.792000,40.727000,67.221135
+No3=100.206000,41.313000,67.514677
+[roi]
+min_z=0
+max_z=1314
+[spline fitting]
+length step=5.000000
+[user_assigned_area]
+sw=0
+[removal_points]
+radius=1.000000
+[spline]
+step_knot_value=0.010000
+[spline curvature]
+display_range_max=0.100000
+[spline torsion]
+display_range_max=0.100000
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[remove_region]
+num=0
+[mesh color]
+blend=0.2

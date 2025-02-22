@@ -29,7 +29,7 @@ def Get_simple_vtk(filepath, frenet=0):
     # Tors = np.array(polydata.GetPointData().GetArray("Torsion"))
     return np_pts
 
-def makeVtkFile(savePath, coords, scalarAttributes):
+def makeVtkFile(savePath, coords, scalarAttributes=[]):
     # scalarAttribute(list):
     # [['MaximumInscribedSphereRadius', 'float', pandas.Series]]
     v = open(savePath, "w+")

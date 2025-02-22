@@ -1,0 +1,151 @@
+[load_dicom]
+search_key=*.dcm
+
+[preprocess_gaussian]
+//	ëOèàóù
+flag_run=0
+sigma=0.2
+flag_load=0
+flag_save=1
+save_stl_flag=1
+save_stl_threshold=450
+save_stl_key0=_step1.stl
+save_stl_key=_step1sm.stl
+
+[preprocess_opening]
+flag_run=1
+threshold=350
+
+[preprocess_remove_bone]
+flag_run=1
+threshold_ct_value=500
+num_opening=2
+remove_volume=300000
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_remove_bone.stl
+
+[preprocess_feret_size]
+flag_run=0
+threshold_ct=400
+feret_z=0.4
+num_dilation=4
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_remove_edge]
+flag_run=0
+ratio_z1=0.15
+ratio_z2=0.20
+save_stl_flag=0
+save_stl_threshold=400
+save_stl_key=_feret.stl
+
+
+[preprocess_calcification]
+save_stl_flag=1
+save_stl_threshold=400
+save_stl_key=_remove_calc.stl
+num_dilation=4
+flag_run=0
+
+
+[preprocess_thinning]
+flag_run=1
+threshold_ct=150
+//threshold_ct=420
+pruning_length=30
+
+
+
+[preprocess]
+threshold_base1=150
+
+expanding_ratio=2
+threshold_low=100
+threshold_high=280
+
+mask_cylinder_x=140
+mask_cylinder_y=170
+mask_cylinder_r=100
+
+step1_STL_threshold=150
+
+remove_z_1=0.4
+voxel gaussian=0
+voxel expanding=1.000000
+modeCubeResolution=1
+modeSmoothing6Neighbor=1
+
+[file]
+dir_dicom=U:\data\hoshina\DICOM\00000003
+key_dicom=*.*
+modeUnsignedShort=0
+[DICOM_visualization]
+min_value=500
+max_value=3000
+[region growing]
+threshold radius=3.000000
+threshold ct-min=1250
+threshold ct-max=1500
+color_index=4
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[prunning length]
+prunning length=50.000000
+[seed_points]
+num=3
+No1=118.600000,153.600000,165.000000
+ct1=1337
+No2=110.400000,164.800000,165.000000
+ct2=1357
+No3=156.054523,156.214185,168.000000
+ct3=1346
+[thinning_points]
+num=15
+No1=191.214844,228.937500,329.097656
+No2=161.296875,109.265625,105.363281
+No3=110.566406,169.101563,1.300781
+No4=234.140625,174.304688,2.601563
+No5=122.273438,206.824219,18.210938
+No6=219.832031,218.531250,15.609375
+No7=184.060547,218.531250,385.331158
+No8=212.677734,212.027344,124.972268
+No9=227.636719,189.263672,124.321370
+No10=125.525391,200.320313,125.623165
+No11=116.419922,188.613281,124.321370
+No12=121.623047,186.011719,131.481240
+No13=199.019531,200.970703,143.848287
+No14=206.173828,193.816406,151.008157
+No15=139.833984,194.466797,312.430669
+[cross section]
+divide_angle=36
+[spline fitting]
+setting for the number of control points=30
+length step=30.000000
+[roi]
+min_z=41
+max_z=132
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.200000
+[spline torsion]
+display_range_max=0.200000
+[remove_region]
+num=3
+No1=142.063679,214.135103,330.000000
+radius1=2.000000
+No2=144.754626,213.482142,330.000000
+radius2=2.000000
+No3=147.421381,214.241898,330.000000
+radius3=2.000000
+[removal_points]
+radius=0.000000
+[spline]
+step_knot_value=0.000000

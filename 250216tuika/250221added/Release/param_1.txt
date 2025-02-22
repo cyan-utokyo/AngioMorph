@@ -1,0 +1,162 @@
+[comment]
+早川先生提供のデータを処理するためにパラメータファイル
+
+[file]
+dir_dicom=U:\data\Simulation\CAS2_70Y_M\CAS2_MRA_head_preope
+key_dicom=*.*
+modeUnsignedShort=0
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=2.000000
+region growing=1050
+voxel gaussian=0
+modeSmoothing6Neighbor=1
+modeCubeResolution=1
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=0
+max_value=600
+z_step=2
+
+[region growing]
+threshold radius=1.000000
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=200
+threshold ct-max=1000
+color_index=3
+modeRemoveHoleRegion=1
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=10.000000
+[spline fitting]
+the number of control points=10
+length step=5.000000
+[test_data]
+step z=200
+radius x=20
+radius y=20
+num_loop=1
+[seed_points]
+num=3
+No1=92.928916,113.888407,32.288196
+ct1=561
+No2=83.470116,90.368581,32.288196
+ct2=797
+No3=103.564147,90.485482,32.288196
+ct3=365
+No4=74.960308,104.388357,21.156591
+ct4=289
+No5=105.767465,83.866511,38.787083
+ct5=457
+No6=105.767465,83.866511,38.787083
+ct6=457
+[thinning_points]
+num=10
+No1=118.125000,143.718750,0.657910
+No2=63.000000,150.937500,1.315820
+No3=64.312500,135.843750,0.657910
+No4=116.156250,131.250000,0.657910
+No5=93.843750,77.437500,41.448327
+No6=50.531250,95.156250,54.606526
+No7=116.812500,112.218750,51.316976
+No8=119.437500,85.312500,33.553407
+No9=85.312500,105.656250,40.790417
+No10=68.906250,83.343750,41.448327
+No11=68.250000,116.812500,0.328892
+No12=75.796875,67.593750,24.995769
+No13=105.000000,148.968750,38.323290
+No14=105.000000,148.968750,38.323290
+No15=105.000000,148.968750,38.323290
+No16=105.000000,148.968750,38.323290
+No17=105.000000,148.968750,38.323290
+No18=105.000000,148.968750,38.323290
+No19=105.000000,148.968750,38.323290
+No20=105.000000,148.968750,38.323290
+No21=105.000000,148.968750,38.323290
+No22=105.000000,148.968750,38.323290
+No23=105.000000,148.968750,38.323290
+No24=105.000000,148.968750,38.323290
+No25=105.000000,148.968750,38.323290
+No26=105.000000,148.968750,38.323290
+No27=105.000000,148.968750,38.323290
+No28=105.000000,148.968750,38.323290
+No29=105.000000,148.968750,38.323290
+No30=105.000000,148.968750,38.323290
+No31=105.000000,148.968750,38.323290
+No32=105.000000,148.968750,38.323290
+No33=105.000000,148.968750,38.323290
+No34=105.000000,148.968750,38.323290
+No35=105.000000,148.968750,38.323290
+No36=105.000000,148.968750,38.323290
+[cross section]
+divide_angle=12
+[roi]
+min_z=0
+max_z=103
+[user_assigned_area]
+sw=0
+[spline curvature]
+display_range_max=0.050000
+[spline torsion]
+display_range_max=0.100000
+[removal_points]
+radius=0.000000
+[seed_points1]
+num=0
+[seed_points2]
+num=0
+[seed_points3]
+num=0
+[seed_points4]
+num=0
+[remove_region]
+num=0
+No1=37.519247,60.228257,38.158777
+radius1=2.000000
+No2=38.954564,67.194883,38.158777
+radius2=2.000000
+No3=36.478842,91.491686,38.158777
+radius3=2.000000
+No4=44.298260,127.414532,38.158777
+radius4=2.000000
+No5=51.325366,133.324076,38.158777
+radius5=2.000000
+No6=77.740273,108.076227,38.158777
+radius6=2.000000
+No7=109.547485,38.701284,38.158777
+radius7=2.000000
+No8=126.946470,27.137978,38.158777
+radius8=2.000000
+No9=144.515835,59.962551,38.158777
+radius9=2.000000
+No10=146.750212,106.181738,38.158777
+radius10=2.000000
+[mesh color]
+blend=0.2
+[spline]
+step_knot_value=0.010000
+numControlPoints=39

@@ -1,0 +1,55 @@
+[comment]
+2012.5
+山田先生データ
+CAS
+
+LiangさんがMCA
+
+[file]
+dir_dicom=U:\data\hayakawa\7140150_20090421_060Y_M_009
+key_dicom=*.dcm
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=1
+region growing=1050
+voxel gaussian=0
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=-200
+max_value=1000
+z_step=2
+
+[region growing]
+threshold radius=1
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=360
+threshold ct-max=760
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=30
+[cross section]
+divide_angle=60
+[roi]
+min_z=176
+max_z=450

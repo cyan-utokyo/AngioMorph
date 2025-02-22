@@ -1,0 +1,47 @@
+[]
+
+[file]
+modeUnsignedShort=0
+dir_dicom=D:\data\hayakawa\nishimura_hiroshi_7140150_20090421_060Y_M_009
+key_dicom=*.*
+[DICOM_visualization]
+min_value=-200
+max_value=1000
+[roi]
+min_z=0
+max_z=0
+[preprocess]
+modeCubeResolution=0
+modeSmoothing6Neighbor=0
+voxel expanding=0.000000
+[region growing]
+threshold radius=0.000000
+threshold ct-min=0
+threshold ct-max=0
+color_index=0
+modeRemoveHoleRegion=0
+closingNumber=0
+openingNumber=0
+erosionNumber=0
+[user_assigned_area]
+sw=0
+[removal_points]
+radius=0.000000
+[prunning length]
+prunning length=0.000000
+[spline fitting]
+length step=1.000000
+[spline]
+step_knot_value=0.050000
+numControlPoints=39
+[cross section]
+divide_angle=0
+[spline curvature]
+display_range_max=0.300000
+[spline torsion]
+display_range_max=0.100000
+[test_data]
+step z=0
+radius x=50
+radius y=50
+num_loop=1

@@ -1,0 +1,46 @@
+[comment]
+早川先生提供のデータを処理するためにパラメータファイル
+
+[file]
+dir_dicom=U:\data\Simulation\CAS1_78Y_M\CAS1_postope_MRA
+key_dicom=*.*
+
+[marching cube]
+threshold=180
+
+[process]
+filename=param_oshima.txt
+
+[preprocess]
+threshold=170
+voxel expanding=2
+region growing=1050
+voxel gaussian=0.8
+
+[DICOM_visualization]
+//min_value=-300
+//max_value=1000
+//min_value=1200
+//max_value=1800
+min_value=0
+max_value=700
+z_step=2
+
+[region growing]
+threshold radius=10
+threshold ct=1500
+threshold ct max=1100
+sphere radius=1
+threshold ct-min=185
+threshold ct-max=800
+
+[calcification]
+threshold ct high=1000
+threshold ct low=1000
+[masking high ct value]
+masking high ct value=800
+[ct range]
+low ct value=200
+high ct value=500
+[prunning length]
+prunning length=10
