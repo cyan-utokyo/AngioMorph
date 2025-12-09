@@ -1,0 +1,557 @@
+\documentclass{ieeeaccess}
+
+
+\usepackage{tabularx}  % 加载tabularx包
+% \usepackage{subcaption}  % 加载subcaption包，加上这个所有capture的格式就都不特殊了
+\usepackage{subfigure} % 为了联排图准备，这个包说是太老了，可能有坑（？
+
+\usepackage{siunitx}  % 加载siunitx包，用于数字格式控制
+\usepackage{subcaption} % 导言区
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{booktabs} 
+\usepackage{mathrsfs}
+% \usepackage{subfig}
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{10.1109/ACCESS.2023.0322000}
+
+% \title{Statistical Modeling and Geometric Characterization of Cerebral Arterial Centerline}
+\title{Development of a Framework for Geometric Analysis of Cerebral Major Arterial Centerlines}
+\author{\uppercase{Yan Chen}\authorrefmark{1},
+\uppercase{Yang Bai}\authorrefmark{2},  and \uppercase{Marie Oshima}\authorrefmark{1,3}}
+
+
+
+\address[1]{Institute of Industrial Science, The University of Tokyo, 4-6-1 Komaba, Meguro-City, Tokyo, Japan (e-mail: chenyan@iis.u-tokyo.ac.jp)}
+\address[2]{the Graduate School of Interdisciplinary Information Studies, The University of Tokyo, 7-3-1 Hongo, Bunkyo-City, Tokyo, Japan (e-mail: yangbai@iis.u-tokyo.ac.jp)}
+\address[3]{Institute of Industrial Science and the Interfaculty Initiative in Information Studies, The University of Tokyo, 7-3-1 Hongo, Bunkyo-City, Tokyo, Japan}
+\tfootnote{This research was supported by JSPS KAKENHI under Grant Number JP22H00190 and AMED under Grant Number JP23tm0524003.}
+
+\markboth
+{Yan Chen \headeretal: Development of a Framework for Geometric Analysis of Cerebral Major Arterial Centerlines}
+{Yan Chen \headeretal: Development of a Framework for Geometric Analysis of Cerebral Major Arterial Centerlines}
+
+\corresp{Corresponding author: Marie Oshima (e-mail: olab@iis.u-tokyo.ac.jp).}
+
+\begin{abstract}
+Intracranial aneurysms are common cerebrovascular malformations, which can lead to life-threatening cerebral hemorrhages. 
+Abnormal hemodynamic parameters, such as wall shear stress, are critical in aneurysm formation. Understanding the relationship between hemodynamics and vessel geometry is useful for assessing the risk of aneurysm formation. This study proposes a geometric framework for the systematic representation and analysis of cerebral major arteries (CMAs).
+Through the combination of statistical shape modeling and geometric parameterization, the framework establishes a mathematical representation of vascular centerlines, which enables the quantification of CMA geometric variations.
+We used a public dataset of healthy CMAs to develop a novel method for characterizing centerline curvature profiles. Our approach quantifies feature point shifts and intensity variations relative to a reference shape. Based on these metrics, CMAs are categorized to identify the most common geometric types in the dataset.
+Additionally, statistical shape modeling is employed to decompose centerline deformations into principal modes using tangent principal component analysis (tangent PCA). The contributions of individual modes of deformation (MoDs) to vascular geometry are examined, revealing that while no single MoD is predominant, specific modes exhibit significant influences on arterial morphology. In particular, MoD1 corresponds to extreme shift values, whereas MoD2 is associated with increased distal shifts and curvature intensities.
+\end{abstract}
+
+\begin{keywords}
+carotid artery, computational anatomy, non-Euclidean space, shape statistics, vascular centerlines
+% Enter key words or phrases in alphabetical
+% order, separated by commas. Autocorrelation, beamforming, communications technology, dictionary learning, feedback, fMRI, mmWave, multipath, system design, multipath, slight fault, underlubrication fault.
+\end{keywords}
+
+\titlepgskip=-21pt
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+\PARstart{I}{ntracranial aneurysms} are pathological dilatations of intracranial arteries, typically forming at sites of inherent weakness in the vessel wall, predominantly around the Circle of Willis. These aneurysms pose significant clinical risks due to their potential for rupture, leading to subarachnoid hemorrhage (SAH), which is known as a severe and often fatal event. 
+SAH accounts for about 5\% of all strokes and has a high fatality rate of around 50\%\cite{Zhou2018Genetics, rinkel1998prevalence}, while the global prevalence of intracranial aneurysms is approximately 3.2\%, making them a major cause of SAH. The predilection sites for aneurysms within the Circle of Willis vary slightly depending on ethnicity and statistical analysis\cite{schievink1997intracranial, ucas2012natural, Keedy2006An}. A comprehensive study conducted in Japan involving 5,720 individuals provided detailed distribution data of aneurysm locations\cite{ucas2012natural}. This study shows that more than 70\% of intracranial aneurysms occur in the cerebral major artery (CMA), which includes middle cerebral artery (MCA) and internal carotid artery (ICA) regions.
+
+Vascular morphology is increasingly understood to influence the development of intracranial aneurysms. Geometric features such as arterial curvature, tortuosity, and bifurcation angles shape the local hemodynamic environment by modulating the distribution of mechanical forces acting on the vessel wall\cite{liu2022increased}. Hemodynamic factors are believed critical in the etiology of intracranial aneurysms. High wall shear stress (WSS) and non-uniform flow can lead to endothelial injury, resulting in structural alterations of the vessel wall\cite{jamous2007endothelial, malek1999hemodynamic}. Hemodynamic research indicates that aberrant blood flow patterns tend to develop in highly curved and tortuous vessels within the CMA, potentially leading to vascular pathologies \cite{phan2012carotid}. 
+
+Since WSS is determined by the velocity distribution of blood flow, computational fluid dynamics (CFD) that can calculate velocity distributions is a valuable tool for predicting vascular diseases. In CFD, determining the velocity involves solving an initial-boundary value problem. In this context, boundary conditions, including the geometry of the flow domain and the inlet and outlet conditions, have a more significant impact than the initial conditions. Complex vessel geometry directly results in complex blood flow patterns, which can lead to vascular diseases. 
+Previous studies\cite{hoi2004effects, Lauric2014a, Lauric2014b} have used CFD to investigate how blood vessel shape and structure influence the distribution of WSS and specific vascular diseases. Several studies have found and explained the relationship between increased arterial curvature, elevated WSS, and the growth, development, and rupture of aneurysms.
+
+The geometric quantification of vascular geometry can be broadly divided into three phases. In the first phase, the focus was on global parameters such as tortuosity and angles at anatomically defined anatomical landmarks~\cite{weibel1965tortuosity,meng2008three,kamenskiy2015age,bergersen2020framework}. These global parameters are typically sparse, offering only one or a few descriptors per vessel to characterize overall curvature. The advancement of medical imaging techniques made it possible to precisely measure anatomical landmarks, enabling the characterization of vascular geometry through angles. Based on the angular tendencies at these landmarks, vascular shapes could be categorized~\cite{earnest1983krayenbuhl,labeyrie2017cervical}, and corresponding hemodynamic trends could be summarized. However, sparse parameters might be too general to adequately describe local features.In the second phase, tools like the vascular modeling toolkit (vmtk), developed in 2002~\cite{antiga2002patient}, and its geometry measurement framework, introduced in 2009~\cite{piccinelli2009framework}, enabled the calculation of dense geometric parameters along the vessel centerline. Here, "dense" refers to parameters distributed along the vessel's length. This approach facilitated the identification of local relationships between shape, hemodynamics, and disease. Many subsequent studies, particularly those involving CFD simulations, utilized this framework to quantify patient-specific vascular geometries. However, in investigating the correspondence between geometry and hemodynamics, it became apparent that the overall characteristics of key anatomical regions were of greater interest. In the third phase, research shifted toward landmark-based or zonal approaches to characterize the features of local regions. Piccinelli et al.,\cite{piccinelli2011geometry} developed a zoning framework that segmented the centerline of the ICA based on curvature, which has since been applied to ICA and other vascular regions. Similarly, Bogunović et al.,\cite{bogunovic2012automated} proposed a sparse landmarking method using parallel transport and applied it to carotid siphon shape classifications initially described by Krayenbuehl et al.\cite{earnest1983krayenbuhl}. However, a recent study by Kjeldsberg et al.,\cite{kjeldsberg2021automated} highlighted that both approaches suffer from parameter specification instability, making them operator-dependent and less robust.
+
+Statistical shape analysis views shapes or curves as random objects, enabling the computation of summary statistics for shape samples, characterizing variability, and facilitating shape classification, clustering, and statistical modeling. Statistical studies of vascular centerline geometry have gained significant attention, supported by the availability of public datasets providing medical cerebrovascular images or geometry data extracted from them, such as BraVa~\cite{wright2013digital} and Aneurisk~\cite{AneuriskWeb}. These datasets have substantially advanced statistical shape analysis. Beyond the medical field, researchers in statistics have shown interest in extracting statistical features of curves, typically focusing on key challenges: determining the distance between two centerlines, defining and computing the mean of a sample of centerlines based on a proper distance metric, identifying the principal modes of variation in a sample of centerlines, and defining probabilistic models on centerlines to generate random samples. The Active Shape Model (ASM) introduced by Cootes et al.~\cite{cootes1995active} provides a statistical framework for modeling shapes by capturing their principal modes of deformation.  ASM relies on principal component analysis (PCA) to construct a model that represents the target object using a set of landmarks. These landmarks are aligned across all training samples to ensure comparability. The shape variation in ASM is constrained by a statistical model derived from PCA, which identifies the primary modes of deformation. This approach ensures that shape changes are confined to realistic anatomical variations. Any shape instance \( X \) can be expressed as a linear combination of the mean shape $X_0$ and a weighted sum of principal components, formulated $X = X_0 + P b$, where $P$ is the matrix of eigenvectors obtained from PCA, representing the dominant modes of shape variation, and $b$ is the vector of shape parameters. This approach has been widely applied in the biomedical field for modeling anatomical shapes. In studies of vascular geometry, particular attention has been given to the aortic arch~\cite{schafer2023aortic,schafer2024principal,schafer2024aortic} Additionally, the femoropopliteal artery has also been a subject of statistical modeling~\cite{rakshe2007knowledge}. For carotid artery, researchers treated dense parameters like curvature or radius as functional data to extract patterns and explore their relationship with hemodynamic parameters or vascular diseases~\cite{sangalli2009case,passerini2012integrated}.
+
+A key goal of statistical shape analysis is to identify the distribution of a dataset by finding its central tendency, or mean, which represents the common features shared across the dataset, while the principal components describe the modes of variation around the mean data. For three-dimensional curve analysis, robust metrics capable of capturing centerline structural differences are critical. This need arises because vascular centerlines are represented as discrete coordinates that are influenced by conformal transformations and parameterization methods, which, in turn, affect the calculation of the mean centerline and the outcomes of singular value decomposition (SVD). To address this, some researchers advocate for metrics and statistical frameworks that are invariant to conformal transformations and parameterization. Kendall~\cite{kendall1984shape} defined shape as the geometric property of an object that remains after filtering out rigid body motions (translation and rotation) and scale transformations. Over the past two decades, the shape analysis community has made steady progress in developing curve-based methods by introducing additional forms of invariance in the analysis, ensuring that re-parameterization does not alter the shape representation of curves. A promising approach is based on elastic metrics, which leverage the square root velocity function (SRVF) to simplify elastic metric computations.\cite{joshi2007novel, srivastava2010shape, kurtek2013statistical,srivastava2016efficient} 
+
+% ------------------------------- %
+% 1. 明确研究动机与研究空白（research gap）：Introduction 结尾补充一段，说明现有方法存在的问题和你的方法的创新之处。
+% 2. 补充研究结构与贡献点：在 Introduction 最后加入对文章结构（e.g., "This paper is organized as follows...") 和你提出方法的主要贡献的总结（bullet points 可用）。
+% ------------------------------- %
+
+
+
+\section{METHODS}
+\label{sectionmethods}
+This study proposes a two-stage framework for the geometric analysis of cerebral arterial centerlines. The first stage focuses on the extraction and quantification of geometric features, including curvature and tortuosity. These features are aligned and compared using a modified Dynamic Time Warping (DTW) algorithm that accounts for local importance via positional weighting. The second stage involves representing the centerline as an elastic shape using the SRVF and analyzing its variation through tangent Principal Component Analysis (tPCA) in the shape space. 
+
+\subsection{Geometric Characterization}
+\label{method:Geometric}
+% The CMAs are known to exhibit consistent patterns of bending along their centerlines. These characteristic bends serve as anatomical landmarks and play important roles in determining local hemodynamic environments. However, conventional geometric measures such as global tortuosity or average curvature are limited in their ability to describe the spatial organization of these deformations. Specifically, they do not capture where bending occurs along the artery, nor do they quantify the intensity of individual bends. Such limitations hinder detailed morphological comparisons between subjects or across populations.
+
+% --- 方法目标引出：引入shift与intensity作为结构描述符 ---
+To enable anatomically meaningful comparisons of vascular morphology, we define two families of geometric descriptors: curvature shift and curvature intensity. These features respectively characterize the spatial location and magnitude of local bending and twisting along each centerline. By anchoring the analysis on consistently identifiable deformation landmarks, they provide a robust basis for quantifying inter-subject variation in artery geometry.
+
+% --- 基础定义：曲率 ---
+Let each centerline be defined as a smooth 3D curve $\mathbf{r}(t) = [x(t), y(t), z(t)]$ parameterized by arc length $t \in [0,1]$.
+
+The curvature $\kappa(t)$ is computed as the norm of the cross product between the first and second derivatives of $\mathbf{r}(t)$, normalized by the cube of the first derivative norm, as shown in Equation~\ref{eq:curvature}.
+
+\begin{equation}
+\kappa(t) = \frac{\| \mathbf{r}'(t) \times \mathbf{r}''(t) \|}{\| \mathbf{r}'(t) \|^3}
+\label{eq:curvature}
+\end{equation}
+
+% The torsion $\tau(t)$ is defined as the projection of the third derivative onto the binormal direction, normalized by the square of the cross product magnitude of the first two derivatives, as shown in Equation~\ref{eq:torsion}.
+
+% \begin{equation}
+% \tau(t) = \frac{\langle \mathbf{r}'(t) \times \mathbf{r}''(t), \mathbf{r}'''(t) \rangle}{\| \mathbf{r}'(t) \times \mathbf{r}''(t) \|^2}
+% \label{eq:torsion}
+% \end{equation}
+
+The resulting scalar function $\kappa(t)$, representing the local bending behavior of the vessel, is used as the geometric profile for subsequent alignment and feature analysis.
+
+%To-Do 缺引用【Srivastava2011】不存在
+% --- 步骤说明：profile对齐方法（elastic alignment）服务于shift的定义 ---
+To compare curvature profiles across individuals, we adopt a baseline method based on the elastic curve registration framework \cite{srivastava2010shape}. This framework estimates subject-specific warping functions that nonlinearly align one-dimensional signals defined on a common domain. Let $\{f_i(t)\}_{i=1}^N$ denote a set of curvature profiles, where $t \in [0,1]$. For each profile $f_i$, a corresponding warping function $\gamma_i: [0,1] \to [0,1]$ is computed by minimizing a variational objective comprising an elastic discrepancy term and a regularization term. The optimization objective is given in Equation~\ref{eq:elastic_alignment}.
+
+\begin{equation}
+\gamma_i^{(r)} = \arg\min_{\gamma} D(f_i \circ \gamma, f^{(r)}) + \lambda \int_0^1 \left(1 - \sqrt{ \dot{\gamma}(t) } \right)^2 \, dt
+\label{eq:elastic_alignment}
+\end{equation}
+
+Here, $D(\cdot, \cdot)$ denotes the elastic distance between profiles, and the second term penalizes non-smooth reparameterizations of time.
+
+After computing the warping functions $\gamma_i^{(r)}$ for all subjects, the reference template is updated as the mean of the aligned profiles, as described in Equation~\ref{eq:template_update}.
+
+\begin{equation}
+f^{(r+1)}(t) = \frac{1}{N} \sum_{i=1}^N f_i\left( \gamma_i^{(r)}(t) \right)
+\label{eq:template_update}
+\end{equation}
+
+The algorithm iterates between warping and template update until convergence. Warping paths are computed via dynamic programming, and template updates may use either the Karcher mean or a Fréchet median approximation.
+
+Although the baseline formulation (Equations~\ref{eq:elastic_alignment}–\ref{eq:template_update}) is robust to morphological variation, it treats all time points $t \in [0,1]$ as equally informative. In vascular structures, however, specific geometric landmarks such as sharp bends are of greater structural relevance.
+
+To address this limitation, we propose two enhancements to the baseline framework.
+
+First, we introduce a point-wise structural weighting scheme that modulates the contribution of each time point during template updates. For each curve $f_i(t)$, a smoothed version is computed to suppress noise while preserving major geometric features. The pointwise weight function is defined in Equation~\ref{eq:weight_function}.
+
+\begin{equation}
+W(t,i) = \left(1 + \alpha_s \cdot |f_i^{\text{smoothed}}(t)| \right) \cdot \left(0.5 + 0.5 \cdot \mathrm{Consistency}(t) \right)
+\label{eq:weight_function}
+\end{equation}
+
+Here, $\alpha_s$ is a tunable parameter, and $\mathrm{Consistency}(t)$ quantifies across-subject alignment stability at each time point. These weights are globally normalized and applied during the averaging step to emphasize structurally significant regions.
+
+Second, we implement an adaptive optimization strategy inspired by the Adam algorithm to improve convergence in the presence of noisy or highly curved gradients. The update rule for the template at iteration $t$ is given in Equation~\ref{eq:adam_mt} to \ref{eq:adam_update}.
+
+\begin{align}
+m_t &= \beta_1 m_{t-1} + (1 - \beta_1) g_t, \label{eq:adam_mt} \\
+v_t &= \beta_2 v_{t-1} + (1 - \beta_2) g_t^2, \label{eq:adam_vt} \\
+\Delta_t &= \frac{m_t}{\sqrt{v_t} + \epsilon} \label{eq:adam_update}
+\end{align}
+
+In this formulation, $g_t$ is the current gradient, $m_t$ and $v_t$ are first and second moment estimates, and $\beta_1, \beta_2$ are decay parameters. This adaptive update allows the optimizer to scale its steps dynamically in response to gradient structure, thereby improving robustness and alignment accuracy.
+
+% --- 核心概念定义：shift 与 intensity ---
+Given an alignment path $h(t)$ between a subject-specific profile and a reference template, we extract two types of curvature-based features. The curvature shift is defined as the positional displacement $|t - h(t)|$ between corresponding curvature peaks in the subject and the reference profiles. The curvature intensity is given by the magnitude $\kappa(t)$ at those peak locations. These features together provide a compact representation of both the spatial distribution and local strength of vessel deformation.
+%------------------------------------------%
+
+\subsection{Elastic representation of centerline}
+
+In this study, each vascular centerline is modeled as a smooth parameterized curve $\beta : [0,1] \rightarrow \mathbb{R}^3$. Since our objective is to analyze the intrinsic shape of vessels, the representation must be invariant under translation, rotation, scaling, and re-parameterization. To this end, we adopt a Riemannian elastic shape analysis framework based on the square-root velocity function (SRVF), which enables shape comparison in an appropriate quotient space.
+
+Given a curve $\beta(t)$, its SRVF $q(t)$ is defined as shown in Equation~\ref{eq:srvf_def}. This transformation captures both the instantaneous direction and local speed of the curve while removing sensitivity to translation.
+
+\begin{equation}
+q(t) = \frac{\dot{\beta}(t)}{\sqrt{\|\dot{\beta}(t)\|}}.
+\label{eq:srvf_def}
+\end{equation}
+
+The original curve can be recovered from its SRVF using the integral relation given in Equation~\ref{eq:srvf_inverse}. Here, $\beta(0)$ denotes the curve’s initial point. To eliminate scale variability, curves are normalized to have unit arc length, as required by Equation~\ref{eq:unit_arc_length}.
+
+\begin{equation}
+\beta(t) = \beta(0) + \int_0^t q(s) \|q(s)\| \, ds,
+\label{eq:srvf_inverse}
+\end{equation}
+
+\begin{equation}
+\int_0^1 \|\dot{\beta}(t)\| \, dt = 1.
+\label{eq:unit_arc_length}
+\end{equation}
+
+Under this constraint, the SRVF satisfies the normalization condition expressed in Equation~\ref{eq:srvf_norm}.
+
+\begin{equation}
+\int_0^1 \|q(t)\|^2 \, dt = 1.
+\label{eq:srvf_norm}
+\end{equation}
+
+All unit-norm SRVFs constitute the preshape space $C$, as defined in Equation~\ref{eq:preshape_space}.
+
+\begin{equation}
+C = \left\{ q : [0,1] \rightarrow \mathbb{R}^3 \mid \|q\|_{\mathbb{L}^2} = 1 \right\}.
+\label{eq:preshape_space}
+\end{equation}
+
+To remove rotational and re-parametric degrees of freedom, we consider the action of the rotation group $\mathrm{SO}(3)$ and the reparameterization group $\Gamma$ on $C$. Given a rotation $\mathrm{O} \in \mathrm{SO}(3)$ and a diffeomorphism $\gamma \in \Gamma$, the SRVF transforms as described in Equation~\ref{eq:transformed_srvf}.
+
+\begin{equation}
+q^*(t) = \sqrt{\dot{\gamma}(t)} \, \mathrm{O}(q(\gamma(t))).
+\label{eq:transformed_srvf}
+\end{equation}
+
+The equivalence class of a curve under these transformations is given in Equation~\ref{eq:equivalence_class}.
+
+\begin{equation}
+[q] = \left\{ \sqrt{\dot{\gamma}} \, \mathrm{O}(q \circ \gamma) \mid \mathrm{O} \in \mathrm{SO}(3), \gamma \in \Gamma \right\}.
+\label{eq:equivalence_class}
+\end{equation}
+
+The shape space $S$ is defined as the quotient of the preshape space by these actions, as shown in Equation~\ref{eq:shape_space}.
+
+\begin{equation}
+S = C / (\mathrm{SO}(3) \times \Gamma).
+\label{eq:shape_space}
+\end{equation}
+
+To compare two shapes $[q_1]$ and $[q_2]$ in $S$, we use the geodesic distance defined by Equation~\ref{eq:geodesic_distance}, which corresponds to the $\mathbb{L}^2$ norm between optimally aligned SRVFs.
+
+\begin{equation}
+d([q_1], [q_2]) = \inf_{\mathrm{O}, \gamma} \left\| q_1 - \sqrt{\dot{\gamma}} \, \mathrm{O}(q_2 \circ \gamma) \right\|_{\mathbb{L}^2}.
+\label{eq:geodesic_distance}
+\end{equation}
+
+The mean shape $\mu$ of a collection of SRVFs $\{[q_1], \dots, [q_n]\}$ is defined as the minimizer of the total squared distance to all samples, as formalized in Equation~\ref{eq:mean_shape}.
+
+\begin{equation}
+\mu = \arg \min_{[q] \in S} \sum_{i=1}^n d([q], [q_i])^2.
+\label{eq:mean_shape}
+\end{equation}
+
+To quantify shape variability, each $q_i$ is projected to the tangent space $T_\mu(S)$ at the mean shape, and the corresponding tangent vector $v_i$ is obtained via the Riemannian logarithmic map. The sample covariance matrix is then computed as shown in Equation~\ref{eq:covariance_matrix}.
+
+\begin{equation}
+K = \frac{1}{n} \sum_{i=1}^n v_i v_i^\top.
+\label{eq:covariance_matrix}
+\end{equation}
+
+Tangent principal component analysis is then performed by component decomposition of $K$, and dominant modes of shape variation are interpreted as directions in the tangent space at the mean shape. Representative deformations can be visualized by mapping scaled tangent vectors back to the manifold via the exponential map.
+
+\section{RESULTS}
+\subsection{Dataset}
+The dataset included participants with an age range of 19 to 64 years (mean = 29.74, SD = 9.02, median = 27.00). Among them, 30 were female, 17 were male, and 1 had an unspecified gender. The mean age for female participants was 29.90 years (SD = 8.62, median = 27.00), while for male participants, it was 29.47 years (SD = 9.94, median = 28.00). A total of 43 individuals had bilateral ICAs, contributing 86 arteries (43 × 2), while 5 individuals had unilateral ICAs (5 × 1).  
+
+Arterial centerlines were extracted from MRA images with an isotropic resolution of 0.62 mm. Following extraction, the centerlines were represented using a 5th-degree spline-fitting procedure~\cite{kobayashi2020penalized}. Compared with the raw extractions, this representation introduced a mean reconstruction error of approximately 0.99 mm (SD = 0.317 mm).  The mean length of all arterial centerlines was 74.90 mm (SD = 8.04 mm). The mean tortuosity was 1.80 (SD = 0.20). No significant linear correlation was observed between arterial length and age (Pearson \( r = 0.146, p = 0.1723 \)), whereas a weak positive correlation was found between tortuosity and age (\(\text{Tortuosity} = 0.01 \times \text{Age} + 1.59\); Pearson \( r = 0.326, p = 0.0018 \)). Additionally, no significant associations were detected between length and sex or between tortuosity and sex. These findings align with conclusions drawn from previous studies.   
+
+\subsection{Geometric Characterization}
+In this subsection, we examine the curvature profiles of vascular shapes, computed using parameters that represent the characteristics of the centerline. DTW was used to align the profiles and identify commonalities. 
+
+% DTW的原始方法 VS 改进方法的比较
+% 开始: 原始的方法种用Residue衡量收敛，现在我们用energy衡量收敛。
+To evaluate the alignment performance of the modified DTW method introduced in Section~\ref{method:Geometric}, we define an explicit energy function that quantifies the alignment consistency across the dataset. This energy measures the deviation between each subject curve and the current mean curve in the SRVF space.
+
+For the baseline unweighted method, the alignment energy is defined as:
+\begin{equation}
+E^{(r)} = \sum_{k=1}^{N} \int_{0}^{1} \left( q^{(r)}_k(t) - \mathrm{mq}^{(r)}(t) \right)^2 dt
+\label{eq:energy_unweighted}
+\end{equation}
+
+We further propose a weighted energy variant that incorporates a spatial weight function \( w_k(t) \), emphasizing structurally important deformation regions:
+\begin{equation}
+E^{(r)} = \sum_{k=1}^{N} \int_{0}^{1} w_k(t) \cdot \left( q^{(r)}_k(t) - \mathrm{mq}^{(r)}(t) \right)^2 dt
+\label{eq:energy_weighted}
+\end{equation}
+
+Figure~\ref{fig:energy_plot} shows the energy values over iterations for both strategies. Compared to the baseline, the proposed method demonstrates more stable convergence and a lower final energy, indicating superior alignment of key anatomical structures.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{img/alignment_convergence.pdf}
+  \caption{
+  Convergence behavior of the alignment optimization.
+  The \textbf{top panel} shows the decrease of residual values across iterations,
+  while the \textbf{bottom panel} illustrates the corresponding decline in residual energy.
+  Results are compared between the unweighted and weighted schemes.}
+  \label{fig:energy_plot}
+\end{figure}
+
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.95\linewidth]{img/energy_modifiedDTW.png}
+%     \caption{Energy comparison over iterations: unweighted baseline vs.\ proposed weighted registration.}
+%     \label{fig:energy_plot}
+% \end{figure}
+% 结束：DTW的原始方法 VS 改进方法的比较
+
+% to-do: 从这里开始引出landmark的概念，并说明landmark是曲率峰值。在fig3的下图种，引入了8个例子，标出了这些例子上的landmarks的位置。它们是ICA上有特征的弯折。
+After DTW processing, the profiles for all centerlines are aligned, as shown in the upper figure of Figure \ref{fig3}. The plot displays the curvature profiles, where the solid black line indicates the mean curvature, serving as the reference for DTW alignment. This profile is referred to as the reference curvature profile in the text. Several landmarks are evident in the curvature profile. These landmarks indicate distinct curvature features characteristic of specific anatomical locations. 
+
+In the DTW alignment, peak displacements from the reference profile are measured as shifts, denoted by $\delta_{s\kappa}$, where negative values indicate distal directions and positive values indicate proximal directions. Similarly, the ratio of peak heights, representing peak intensities, is denoted by $I_\kappa$.
+% To-Do: 需要说明它们的shift intensity是用method中介绍过的方法算出来的。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.95\linewidth]{img/curvature.png}
+	\caption{Aligned curvature profiles. The upper panel displays curvature profiles, while the lower panel shows eight examples.}
+	\label{fig3}
+\end{figure}
+
+We computed the correlation between the intensity and shift of C0 to C4, using the autocovariance formula. The results are shown in Figure \ref{fig:pairwise}. 
+
+\begin{figure*}[!t]
+    \centering
+    \subfigure[Pairwise curvature shifts]{%
+        \includegraphics[width=0.48\textwidth]{img/shift_pairwise.pdf}%
+        \label{fig:shift_pairwise}
+    }\hfill
+    \subfigure[Pairwise curvature intensit]{%
+        \includegraphics[width=0.48\textwidth]{img/intensity_pairwise.pdf}%
+        \label{fig:intensity_pairwise}
+    }
+    \caption{Pairwise relationships at selected peaks: (a) time shifts, (b) curvature ratios.}
+    \label{fig:pairwise}
+\end{figure*}
+
+
+
+\subsection{Mathematic Representation and tangent PCA}
+% The tangent PCA of the elastic representations revealed that the data possess a strong structural redundancy. Although each centerline was originally parameterized by 240 points in 3D, the cumulative variance explained by the leading components rapidly increased, indicating that the data are intrinsically low-dimensional. Specifically, the first three PCs already captured approximately 82\% of the total variance, and the first eight PCs reached 96\%. This implies that a small number of modes suffice to characterize the majority of vascular shape variability. The distribution of individual loadings and the cumulative variance explained across PCs are shown in Figure~\ref{fig:tpca_variance}, highlighting the rapid saturation of variance contributions within the first several components.
+
+% \begin{figure*}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.45\linewidth]{img/tpca_variance.png}
+%     \caption{Principal component (PC) loadings and cumulative variance explained across components.}
+% 	\label{fig:tpca_variance}
+% \end{figure*}
+
+The tangent PCA of the elastic representations revealed a strong structural redundancy in the data. 
+Although each centerline was originally parameterized by 240 points in 3D, the cumulative variance explained by the leading components increased rapidly, indicating that the data are intrinsically low-dimensional. 
+PC1 alone accounted for 44.7\% of the total variance, while PC2 and PC3 contributed 19.9\% and 14.5\%, respectively, bringing the cumulative variance explained (CVE) of the first three PCs to 79.2\%. 
+Adding PC4 increased the CVE to 85.1\%, and the first five PCs together explained 89.2\% of the variance. 
+The contributions of higher-order components quickly diminished: PC6 and PC7 added only 3.0\% and 1.4\%, respectively, while PC8 contributed just 1.1\%, with the cumulative total reaching 94.8\%. 
+By PC10 the CVE exceeded 96.7\%, and by PC16 it reached 99.2\%. 
+These results demonstrate that a small number of components—approximately five to eight—are sufficient to capture the majority of vascular shape variability, with later components contributing only marginally above the noise level.
+
+
+
+To quantify the intrinsic dimensionality, we computed the effective rank as
+\begin{equation}
+r_{\mathrm{eff}} = \exp\!\left(-\sum_{i} p_i \log p_i \right), 
+\qquad 
+p_i = \frac{\lambda_i}{\sum_j \lambda_j},
+\end{equation}
+which yielded $r_{\mathrm{eff}} \approx 5.6$. This result corroborates that only about 5--6 independent degrees of freedom drive the overall centerline deformation patterns, despite the high raw dimensionality.
+
+The reconstruction experiments further support this interpretation. When reconstructing curves using only the first three PCs, the mean point-wise RMSE was approximately 2.31 mm (about 3--4 voxels at 0.62 mm resolution). This error magnitude is comparable to the overall pipeline uncertainty, considering segmentation, centerline extraction, and spline fitting (the latter contributed a mean RMSE of 0.99 mm, SD = 0.32 mm). Therefore, three PCs already provide a sufficiently accurate description of the global geometry. By contrast, reconstruction with eight PCs reduced the error to 1.08 mm (about 2 voxels), which is almost indistinguishable from the spline modeling error itself. Thus, eight PCs can be regarded as reaching the practical precision limit of the dataset.
+
+The broken-stick test was also performed to assess the significance of the PCs. For a dimensionality of $D = 720$, the expected proportion under the broken-stick model is
+\begin{equation}
+E[\lambda_i] = \frac{1}{D} \sum_{j=i}^D \frac{1}{j}.
+\end{equation}
+The first ten PCs exceeded this baseline, confirming that their variance contributions are stronger than what would be expected from random noise. Notably, PCs 1--3 showed dominant contributions (34.6\%, 28.8\%, and 18.9\%, respectively), while PCs 4--8 contributed smaller but still meaningful structural variations. PCs 9--10 were marginal, and PCs beyond 10 were indistinguishable from noise. Taken together, these results demonstrate that three components suffice for robust global characterization, whereas eight components achieve near-exact fidelity to the original data.
+
+Figure~\ref{fig:tpca_modes} illustrates shape variability along the first three principal components (PCs). 
+For each PC, the mean curve was perturbed at $\pm$1$\sigma$, $\pm$2$\sigma$, and $\pm$3$\sigma$, with local curvature values indicated by color. 
+These perturbations demonstrate how low-dimensional modes capture systematic geometric deformations across the dataset.
+
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/tpca_modes.pdf}
+    \caption{Geometry variations along the first three principal components (PCs). For each PC, the mean curve and reconstructions at $\pm$1$\sigma$, $\pm$2$\sigma$, and $\pm$3$\sigma$ are shown, with color encoding local curvature values.}
+	\label{fig:tpca_modes}
+\end{figure*}
+
+
+
+
+
+To further evaluate consistency across representations, we compared two forms of population averages. 
+The \textit{Reference Curvature profile} (RC) was obtained by aligning individual curvature functions with the weighted DTW method and averaging them pointwise in function space, whereas the \textit{Mean Centerline} (MC) was defined as the Fréchet mean curve on the SRVF manifold. 
+Because curvature depends on second-order derivatives and normalization, the curvature profile of the MC does not coincide with the RC; averaging and curvature computation are not commutative operators. 
+Despite these differences, both representations consistently exhibited the same number of salient landmarks, underscoring the stability of anatomical features. 
+Table~\ref{tab:landmark_diff} quantifies the positional (normalized arc length) and intensity (curvature magnitude) discrepancies between RC and MC across five major landmarks.
+
+\begin{table}[htbp]
+\centering
+\caption{Differences between RC and MC landmarks. Position differences are expressed in normalized arc length (0--1), and intensity differences are expressed as curvature magnitude.}
+\begin{tabular}{c c c}
+\hline
+Landmark  & $\Delta$shift (MC--RC) & $\Delta$intensity (MC--RC) \\
+\hline
+C0  & 0.000  & +0.110 \\
+C1  & -0.034 & +0.423 \\
+C2  & -0.080 & +0.080 \\
+C3  & +0.210 & +0.025 \\
+C4  & +0.097 & +0.470 \\
+\hline
+\end{tabular}
+\label{tab:landmark_diff}
+\end{table}
+
+Direct associations between principal components and local geometric features are often weak. This arises because tangent PCA identifies global modes of variation across the entire centerline, whereas curvature landmarks represent localized characteristics. As a result, a single PC typically influences multiple landmarks simultaneously, diluting one-to-one correlations. In addition, the bidirectional nature of PCA modes and the inherent variability in landmark detection both weaken the apparent linear association between PCs and local geometric features.
+
+To address this challenge, we devised an incremental reconstruction strategy to assess the geometric influence of individual PCs. 
+The idea is straightforward: instead of examining raw correlations between PC scores and landmark features, we reconstruct each subject's curve using an increasing number of leading PCs ($k=2,3,\dots$) and evaluate how the association between a specific PC score and the geometric features evolves with $k$. 
+
+Formally, for subject $i$ and reconstruction dimension $k$, the reconstructed curve is given by
+\[
+\hat{C}_{i}^{(k)} = \mathrm{Exp}_{\bar{C}}\!\left(\sum_{j=1}^{k} \text{score}_{i,j}\,\mathbf{v}_j\right),
+\]
+where $\bar{C}$ is the mean curve on the SRVF manifold, $\mathbf{v}_j$ denotes the $j$-th PC direction, and $\text{score}_{i,j}$ is the corresponding PC score. 
+On each $\hat{C}_{i}^{(k)}$, landmark positions and curvature intensities (C0–C4) are computed, and their correlations with the target PC score are tracked across $k$. 
+
+This incremental analysis reveals whether the geometric effect of a PC is \textit{persistent} (correlations remain strong as higher PCs are added), \textit{diluted} (correlations weaken with $k$), or even \textit{inverted} (sign flips with $k$), thereby capturing how higher-order deformations modify or obscure the primary influence of each PC.
+
+%--
+
+Applying this framework to our dataset, we investigated how individual PCs influence geometric descriptors, focusing on curvature intensities at landmarks C0–C4 and landmark positions at C1–C3. 
+The results are summarized in Figure~\ref{fig:pc_feature_trends}, where each panel shows the Pearson correlation between a given PC score (PC1–PC8) and the geometric feature of interest, evaluated across reconstruction dimensions $k=2$ to $10$. 
+This design allows us to examine not only whether a PC exerts an effect on a feature, but also whether such an effect is sustained or altered when additional modes of variation are introduced.
+
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{img/pc_feature_trends.pdf}
+    \caption{Incremental reconstruction analysis of PC–feature associations. 
+    Each panel shows the Pearson correlation ($r$) between individual PC scores (PC1–PC8) and geometric descriptors as a function of reconstruction dimension $k$ (2--10). 
+    Top row: curvature intensities at landmarks C0--C2. 
+    Middle row: curvature intensities at landmarks C3--C4. 
+    Bottom row: normalized arc-length positions of landmarks C1--C3. 
+    Persistent correlations across increasing $k$ indicate stable PC--feature relationships, whereas attenuation reflects dilution of influence by higher-order PCs.}
+    \label{fig:pc_feature_trends}
+\end{figure*}
+
+Several distinct behaviors can be observed. 
+First, some PCs exhibited \textit{persistent} effects: their correlations with specific landmarks remained stable or even strengthened as $k$ increased. 
+For example, certain PCs consistently influenced the curvature intensity at distal landmarks, suggesting that these modes capture fundamental shape variations that are not substantially modified by higher-order components. 
+Second, other PCs showed \textit{diluted} effects: correlations that appeared strong at low $k$ diminished when additional PCs were incorporated, indicating that their apparent influence is partially confounded or overshadowed by higher-order modes. 
+Finally, in a subset of features we observed \textit{inverted} effects, where the sign of correlation flipped as $k$ increased. 
+Such inversions imply non-linear interactions between PCs in geometric space, where the addition of higher-order deformations can obscure or even reverse the relationship observed in lower-dimensional reconstructions.
+
+These findings emphasize two key points. 
+On the one hand, the persistence of certain correlations demonstrates that PCA modes indeed capture stable, interpretable geometric traits, even when measured at localized landmarks. 
+On the other hand, the dilution and inversion phenomena highlight the limits of interpreting PCs in isolation: the apparent effect of a single component depends on the dimensional context in which it is evaluated. 
+Thus, while the overall dimensionality of the dataset is low, the mapping from global modes of variation to local geometric features is neither linear nor additive, underscoring the importance of incremental reconstruction as a diagnostic tool for disentangling PC–feature relationships.
+
+%---AUC%
+
+The correlation trends in Figure~\ref{fig:pc_feature_trends} reveal several important insights.  
+First, some PCs exhibit clear and persistent associations with specific geometric descriptors, such as the strong and stable correlations between PC1 and curvature intensity at the proximal landmarks (C0--C2). This indicates that the leading modes of variation capture fundamental, large-scale deformations that consistently align with recognizable structural features of the vasculature. By contrast, the influence of higher-order PCs tends to be more localized and less stable: correlations often weaken as more components are added to the reconstruction, reflecting that subtle, high-frequency variations are easily masked or diluted by the inclusion of additional shape variability. 
+Second, these trends highlight that not all apparent associations are equally meaningful. In several cases, an initially strong relationship between a PC and a landmark feature diminishes rapidly with increasing $k$, suggesting that the effect may represent a partial artifact of dimensional truncation rather than a robust geometric determinant. Conversely, in other cases correlations remain robust across reconstructions, underscoring that certain PCs encode genuine and reproducible modes of vascular variability. Thus, the incremental analysis allows us to discriminate between stable associations that reflect interpretable anatomy and transient ones that do not.  
+
+To provide a more compact quantitative summary of these observations, we introduced the **normalized area under the curve (AUC\textsubscript{norm})** metric.  
+This metric is defined on the absolute correlation trajectory $|r(k)|$ of a given PC--feature pair, measured across reconstruction dimensions $k=2$ to $10$.  
+The raw area under the curve is computed using trapezoidal integration,  
+
+\begin{equation}
+\text{AUC} = \int_{k_{\min}}^{k_{\max}} |r(k)| \, dk ,
+\end{equation}
+and is then normalized by the length of the interval:
+\begin{equation}
+\text{AUC}_{\text{norm}} = \frac{\text{AUC}}{k_{\max} - k_{\min}} .
+\end{equation}
+
+In this way, AUC\textsubscript{norm} represents the mean absolute correlation strength sustained across the full reconstruction range.  
+A high AUC\textsubscript{norm} indicates that a PC consistently exerts a strong influence on a given feature even as higher-order modes are introduced, while a low value indicates that the effect is weak or unstable.  
+Compared to using only the peak or final correlation, this integrated measure is more robust to local fluctuations, captures both the magnitude and persistence of associations, and allows direct comparison across PCs and features.  
+
+The results are summarized in Table~\ref{tab:auc_norm}. Several robust patterns emerge.  
+PC2 shows strong and persistent associations with multiple descriptors, including curvature at C0 (AUC\textsubscript{norm}=0.588) and the position of C1 (0.629), suggesting that it captures a global mode influencing both curvature and axial alignment.  
+PC3 and PC4 are more selective, showing pronounced effects on distal curvature features (e.g., C4: 0.518 for PC3, 0.315 for PC4) and positional descriptors (e.g., C2: 0.518 for PC3, 0.561 for PC4).  
+Notably, PC6 stands out with high persistence values at C3 (0.691) and position C3 (0.747), indicating that it represents a distinctive mode of localized deformation in the distal siphon region.  
+In contrast, PCs with uniformly low AUC\textsubscript{norm} values (e.g., PC5 across most features) appear to encode weaker, less systematic sources of variability.  
+
+\begin{table}[htbp]
+\centering
+\caption{Normalized area under the curve (AUC\textsubscript{norm}) values summarizing the persistence of PC--feature associations. Rows correspond to geometric features (curvature at landmarks C0--C4, positions at C1--C3), and columns correspond to PCs 1--8. Higher values indicate stronger and more persistent associations.}
+\begin{tabular}{lcccccccc}
+\hline
+Feature & PC1 & PC2 & PC3 & PC4 & PC5 & PC6 & PC7 & PC8 \\
+\hline
+curvature\_C0 & 0.35 & 0.59 & 0.19 & 0.03 & 0.13 & 0.09 & 0.76 & 0.09 \\
+curvature\_C1 & 0.25 & 0.10 & 0.21 & 0.43 & 0.34 & 0.44 & 0.27 & 0.14 \\
+curvature\_C2 & 0.87 & 0.04 & 0.15 & 0.14 & 0.20 & 0.16 & 0.31 & 0.25 \\
+curvature\_C3 & 0.51 & 0.28 & 0.04 & 0.06 & 0.28 & 0.69 & 0.54 & 0.12 \\
+curvature\_C4 & 0.08 & 0.26 & 0.52 & 0.32 & 0.50 & 0.06 & 0.33 & 0.58 \\
+position\_C1  & 0.07 & 0.63 & 0.56 & 0.43 & 0.18 & 0.09 & 0.30 & 0.02 \\
+position\_C2  & 0.21 & 0.40 & 0.52 & 0.56 & 0.39 & 0.26 & 0.22 & 0.20 \\
+position\_C3  & 0.11 & 0.07 & 0.57 & 0.16 & 0.02 & 0.75 & 0.36 & 0.23 \\
+\hline
+\end{tabular}
+\label{tab:auc_norm}
+\end{table}
+
+
+
+
+
+
+
+% UVCS 备用
+% Figure~\ref{fig:tpca_recon} presents representative examples (U, V, C, S) comparing the original curves with reconstructions using 3 PCs, 8 PCs, and all PCs. Three PCs already capture the gross morphology, while eight PCs achieve near-exact fidelity to the original shapes.
+
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{img/tpca_reconstructions.pdf}
+    \caption{Reconstruction of representative curves using an increasing number of PCs (Original, 3 PCs, 8 PCs, and all PCs). Colors represent local curvature values. Rows (1)–(4) correspond to different anatomical cases.}
+    \label{fig:tpca_reconstructions}
+\end{figure*}
+
+
+
+\section{Discussion}
+
+
+\appendices
+% \section{\break Footnotes}
+
+
+\section*{Acknowledgment}
+
+This study was supported by valuable insights from researchers at the Institute of Fluid Science, Tohoku University, and the Department of Mechanical Engineering, The University of Tokyo. The authors sincerely appreciate their contributions.
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref.bib}
+% \begin{thebibliography}{00}
+
+% \bibitem{b1} G. O. Young, ``Synthetic structure of industrial plastics,'' in \emph{Plastics,} 2\textsuperscript{nd} ed., vol. 3, J. Peters, Ed. New York, NY, USA: McGraw-Hill, 1964, pp. 15--64.
+
+% \end{thebibliography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{author1.png}}]{First A. Author} received the B.S. and M.S. degrees in aerospace engineering from
+% the University of Virginia, Charlottesville, in 2001 and the Ph.D. degree in
+% mechanical engineering from Drexel University, Philadelphia, PA, in 2008.
+
+% From 2001 to 2004, he was a Research Assistant with the Princeton Plasma
+% Physics Laboratory. Since 2009, he has been an Assistant Professor with the
+% Mechanical Engineering Department, Texas A{\&}M University, College Station.
+% He is the author of three books, more than 150 articles, and more than 70
+% inventions. His research interests include high-pressure and high-density
+% nonthermal plasma discharge processes and applications, microscale plasma
+% discharges, discharges in liquids, spectroscopic diagnostics, plasma
+% propulsion, and innovation plasma applications. He is an Associate Editor of
+% the journal \emph{Earth, Moon, Planets}, and holds two patents.
+
+% Dr. Author was a recipient of the International Association of Geomagnetism
+% and Aeronomy Young Scientist Award for Excellence in 2008, and the IEEE
+% Electromagnetic Compatibility Society Best Symposium Paper Award in 2011.
+% \end{IEEEbiography}
+
+\EOD
+
+% \section{Fluid Dynamics of Blood Flow}
+% WSS $\tau_w = \mu \left( \frac{\partial u}{\partial y} \right)_{y=0}$ is the tangential force per unit area exerted by blood flow on the endothelial surface of blood vessels, where $\mu$ is the dynamic viscosity of the blood, and $\frac{\partial u}{\partial y}$ is the velocity gradient perpendicular to the wall, evaluated at the wall ($y=0$). Typically, the inner wall of the curve experiences lower WSS, while the outer wall experiences higher WSS due to the centrifugal forces pushing the fluid towards the outer wall and therefore changing the velocity gradient near the vessel wall. 
+
+
+
+
+
+
+
+
+\end{document}
